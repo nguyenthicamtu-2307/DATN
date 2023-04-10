@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Foryou</string>
+    <string name="slogan">Trao yêu thương -  đổi nụ cười</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textDecription">
+        Theo số liệu thống kê nhiều năm thì
+        trung bình hàng năm có khoảng 5 -
+        6 cơn bão và 2 - 3 ATNĐ ảnh hưởng
+        đến Việt Nam.</string>
+    <string name="register">
+        Đăng ký để trở thành người dùng ứng dụng,
+        sẵn sàng hỗ trợ ứng cứu thiên tai.</string>
+    <string name="drop_list">SeclectItem</string>
+    <string name="login">Chào mừng quay trở lại! </string>
+    <string name="textsub_login">Bạn vui lòng đăng nhập để sử dụng ứng dụng và sẵn sàng hỗ trợ ứng cứu thiên tai.</string>
+</resources>

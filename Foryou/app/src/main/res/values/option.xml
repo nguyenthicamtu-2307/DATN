@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user">
+        <item>Cán Bộ</item>
+        <item>Đội cứu trợ</item>
+        <item>Người quyên góp</item>
+
+    </string-array>
+</resources>
