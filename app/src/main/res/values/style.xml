@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- Base application theme. -->
+
+
+    <style name="MytextInputLayoutStyle">
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
+
+</resources>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_person_needaid"
+    app:startDestination="@id/homeFragment3">
+
+    <fragment
+        android:id="@+id/personFragment2"
+        android:name="com.example.foryou.View.Donation.MainPage.Fragment.PersonFragment"
+        android:label="fragment_four"
+        tools:layout="@layout/fragment_four" />
+    <fragment
+        android:id="@+id/homeFragment3"
+        android:name="com.example.foryou.View.Donation.MainPage.Fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+</navigation>

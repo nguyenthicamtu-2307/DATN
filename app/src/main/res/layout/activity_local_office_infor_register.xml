@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Canbo.LocalOfficeInforRegister">
+
+
+    <LinearLayout
+        android:id="@+id/lnHeaderInforRegistration"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textStyle="bold"
+            android:textColor="@color/primaryColor"
+            android:textSize="@dimen/_24ssp"
+            android:text="Thông tin đăng kí"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imageEvent"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_88sdp"
+                android:src="@drawable/imange6"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="@dimen/_30sdp"
+                android:textSize="@dimen/_22ssp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Phố cổ hội an sau lũ"
+                android:id="@+id/txtNameEvent"
+                app:layout_constraintTop_toBottomOf="@id/imageEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/lnAdressLocalRegister"
+                android:layout_margin="@dimen/_15sdp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/txtNameEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Địa điểm : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Quảng nam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            <EditText
+                android:id="@+id/edtNumberOfHosehold"
+                android:background="@drawable/edittext_custom"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                app:layout_constraintTop_toBottomOf="@id/lnAdressLocalRegister"
+                android:layout_width="match_parent"
+                android:hint="Số hộ dân cần cứu trợ"
+                android:textColorHint="@color/textcolor"
+                android:layout_height="@dimen/_40sdp"/>
+            <EditText
+                android:id="@+id/edtNeccessaryLocal"
+                android:background="@drawable/edittext_custom"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_50sdp"
+                app:layout_constraintTop_toBottomOf="@id/edtNumberOfHosehold"
+                android:layout_width="match_parent"
+                android:hint="Nhu yếu phẩm cần thiết"
+                android:textColorHint="@color/textcolor"
+                android:layout_height="@dimen/_40sdp"/>
+
+            <Button
+                android:textSize="@dimen/_15ssp"
+                android:textColor="@color/white"
+                android:text="Đăng kí"
+                android:background="@drawable/button_custom"
+                android:layout_marginTop="@dimen/_90sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edtNeccessaryLocal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

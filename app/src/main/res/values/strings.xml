@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Foryou</string>
+    <string name="slogan">Trao yêu thương -  đổi nụ cười</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textDecription">
+        Theo số liệu thống kê nhiều năm thì
+        trung bình hàng năm có khoảng 5 -
+        6 cơn bão và 2 - 3 ATNĐ ảnh hưởng
+        đến Việt Nam.</string>
+    <string name="register">
+        Đăng ký để trở thành người dùng ứng dụng,
+        sẵn sàng hỗ trợ ứng cứu thiên tai.</string>
+    <string name="drop_list">SeclectItem</string>
+    <string name="detailDonation">
+        Với mong muốn những cảnh đời khó khăn sẽ được sưởi ấm bằng những món quà tuy nhỏ nhưng tràn đầy tình yêu thương, tràn đầy hơi ấm tình người,
+        Trung tâm Tư vấn pháp luật phối hợp với BCH Công đoàn Học viện Tư pháp kêu gọi những tấm lòng nhân ái tham gia chương trình quyên góp, hỗ trợ, đóng gópvề tinh thần và vật chất cho các chương trình từ thiện.
+    </string>
+    <string name="formDonation">Hình thức quyên góp
+- Hiện vật: Quần áo, chăn màn, giày dép, mũ, tất chân, găng tay, sách vở, đồ dùng học  tập, đồ dùng sinh hoạt…(mới hoặc cũ, sạch sẽ, còn sử dụng được).
+- Tiền mặt. Hộp đựng tiền quyên góp sẽ được mở ra với sự chứng kiến của đại diện Lãnh đạo Học viện, Ban chấp hành công đoàn, Trung tâm Tư vấn pháp luật và các đoàn viên Công đoàn Học viện Tư pháp.
+ Số tiền quyên góp được sẽ được sử dụng để mua gạo, quà tặng trực tiếp cho người có hoàn cảnh khó khăn.
+Hình thức trao quà tặng: Quà tặng sẽ được trao tận tay những người khó khăn và có nhu cầu sử dụng thực sự.</string>
+    <string name="login">Chào mừng quay trở lại! </string>
+    <string name="inforDonation">Mỗi số tiền,vật phẩm mà bạn quyên góp đã góp phần nhỏ giúp người dân đang bị thiên tai</string>
+    <string name="textsub_login">Bạn vui lòng đăng nhập để sử dụng ứng dụng và sẵn sàng hỗ trợ ứng cứu thiên tai.</string>
+</resources>

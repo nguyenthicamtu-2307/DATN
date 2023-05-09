@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="rescue_team" />
+    <item type="id" name="local_officer" />
+
+    <item type="id" name="sponor" />
+
+</resources>
