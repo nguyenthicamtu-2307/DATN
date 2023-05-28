@@ -67,7 +67,7 @@ class HomeActivity : AppCompatActivity() {
                         if (data_ == "local_officer") {
                             makeCurrentFragment(managerAid)
                         } else {
-                            if (data_ == "sponor")
+                            if (data_ == "sponsor")
                                 makeCurrentFragment(donationList)
                         }
                     }
@@ -79,7 +79,7 @@ class HomeActivity : AppCompatActivity() {
                         if (data_ == "local_officer") {
                             makeCurrentFragment(activityAid)
                         } else {
-                            if (data_ == "sponor")
+                            if (data_ == "sponsor")
                                 makeCurrentFragment(historyDonation)
                         }
                     }

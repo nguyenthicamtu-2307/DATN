@@ -14,7 +14,8 @@ import android.widget.Toast
 
 import androidx.lifecycle.ViewModelProvider
 import com.example.foryou.Model.Contents.*
-import com.example.foryou.Model.Retrofit.RetrofitIntance
+import com.example.foryou.Model.Retrofit.MyInterceptors
+
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.Model.UserModel.User
 import com.example.foryou.R
@@ -22,9 +23,13 @@ import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.View.Login.LoginActivity
 import com.example.foryou.ViewModel.RegisterViewModel
 import com.example.foryou.databinding.ActivityRegisterBinding
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -78,6 +83,10 @@ class RegisterActivity : AppCompatActivity() {
             registerUser()
 
         }
+        binding.txtDangNhap.setOnClickListener {
+            var intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }
@@ -87,8 +96,23 @@ class RegisterActivity : AppCompatActivity() {
     fun getProvinced() {
         var provinceList: List<ProvincesItem> = emptyList()
 
-        apiService = RetrofitIntance.getRetroInstance().create(getClient::class.java)
-        val call = apiService.getProvinced()
+        var loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        //
+        val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
+        val client = OkHttpClient.Builder()
+            .addInterceptor(MyInterceptors(sharedPreferences))
+            .addInterceptor(loggingInterceptor)
+            .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseURL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val api = retrofit.create(getClient::class.java)
+        val call = api.getProvinced()
 
 
         call.enqueue(object : Callback<ProvincesRespon> {
@@ -125,7 +149,6 @@ class RegisterActivity : AppCompatActivity() {
                                 id: Long
                             ) {
 
-
                                 val ProvincesItem =
                                     data?.get(binding.spProviced.selectedItemPosition)
                                 provinceId = ProvincesItem?.id.toString()
@@ -158,7 +181,23 @@ class RegisterActivity : AppCompatActivity() {
 
 
     private fun loadDistrictsByProvinceId(provinceId: String) {
-        apiService.getDistrictbyProvince(provinceId).enqueue(object : Callback<ApiResponse> {
+        var loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        //
+        val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
+        val client = OkHttpClient.Builder()
+            .addInterceptor(MyInterceptors(sharedPreferences))
+            .addInterceptor(loggingInterceptor)
+            .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseURL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val api = retrofit.create(getClient::class.java)
+        api.getDistrictbyProvince(provinceId).enqueue(object : Callback<ApiResponse> {
             override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                 if (response.isSuccessful) {
                     val data = response.body()?.data?.districts
@@ -216,7 +255,23 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun getWards(district: String) {
-        apiService.getWardbyDistrict(district).enqueue(object : Callback<WardsRespon> {
+        var loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        //
+        val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
+        val client = OkHttpClient.Builder()
+            .addInterceptor(MyInterceptors(sharedPreferences))
+            .addInterceptor(loggingInterceptor)
+            .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseURL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val api = retrofit.create(getClient::class.java)
+        api.getWardbyDistrict(district).enqueue(object : Callback<WardsRespon> {
             override fun onResponse(call: Call<WardsRespon>, response: Response<WardsRespon>) {
                 if (response.isSuccessful) {
                     val data = response.body()?.data?.wards
@@ -280,11 +335,27 @@ class RegisterActivity : AppCompatActivity() {
         val middleName = binding.edtMiddleName.text.toString()
         val lastName= binding.edtLastName.text.toString()
         val phone = binding.edtPhoneNumber.text.toString()
+        var username = binding.edtUsername.text.toString()
 
-        var user = User(usertype,email,passWord,firstName,middleName,lastName,phone,provinceId,districtId,selectSpinnerId)
+        var user = User(usertype,email,passWord,firstName,middleName,lastName,phone,username,provinceId,districtId,selectSpinnerId)
         Log.d("user",user.toString())
-        apiService = RetrofitIntance.getRetroInstance().create(getClient::class.java)
-        val call = apiService.register(user)
+        var loggingInterceptor =
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        //
+        val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
+        val client = OkHttpClient.Builder()
+            .addInterceptor(MyInterceptors(sharedPreferences))
+            .addInterceptor(loggingInterceptor)
+            .build()
+        val retrofit = Retrofit.Builder()
+            .baseUrl(baseURL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val api = retrofit.create(getClient::class.java)
+        val call = api.register(user)
         call.enqueue(object : Callback<User>{
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.isSuccessful) {

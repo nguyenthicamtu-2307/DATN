@@ -99,6 +99,7 @@
                 android:layout_height="@dimen/_40sdp"/>
 
             <Button
+                android:id="@+id/btnDK"
                 android:textSize="@dimen/_15ssp"
                 android:textColor="@color/white"
                 android:text="Đăng kí"

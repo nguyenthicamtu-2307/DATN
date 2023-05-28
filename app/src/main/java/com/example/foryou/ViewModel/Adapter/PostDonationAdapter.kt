@@ -7,33 +7,36 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.foryou.Model.Event.DataItem
 import com.example.foryou.Model.ListEvent
 import com.example.foryou.Model.ListItem
+import com.example.foryou.Model.RescueTem.DataItemDonation
 import com.example.foryou.R
 
-class PostDonationAdapter(var context: Context): RecyclerView.Adapter<PostDonationAdapter.MyViewHolder>() {
-    var datalist = emptyList<ListItem>()
+class PostDonationAdapter(): RecyclerView.Adapter<PostDonationAdapter.MyViewHolder>() {
+    private var onDonation : OnDonationClick? = null
 
-    internal fun setData(datalist:List<ListItem>){
-        this.datalist = datalist
+    var list= mutableListOf<DataItemDonation>()
+    fun replaceList(listAbc: MutableList<DataItemDonation>) {
+        list = listAbc
+        notifyDataSetChanged()
     }
-
     class MyViewHolder(view: View):RecyclerView.ViewHolder(view){
-        lateinit var image : ImageView
-        lateinit var title : TextView
-        lateinit var location : TextView
-        lateinit var time : TextView
-        lateinit var money: TextView
-        lateinit var seeDetail:TextView
 
-        init{
-            image = view.findViewById(R.id.imagPost)
-            title = view.findViewById(R.id.txtTitlePost)
-            location=view.findViewById(R.id.txtLocationPost)
-            time = view.findViewById(R.id.txtTimePost)
-            money = view.findViewById(R.id.txtMoneyPost)
-            seeDetail = view.findViewById(R.id.txtSee)
+        var   image = view.findViewById<ImageView>(R.id.imagPost)
+        var  title = view.findViewById<TextView>(R.id.txtTitlePost)
+        var  location=view.findViewById<TextView>(R.id.txtLocationPost)
+        var time = view.findViewById<TextView>(R.id.txtTimePost)
+        var money = view.findViewById<TextView>(R.id.txtMoneyPost)
+        var seeDetail = view.findViewById<TextView>(R.id.txtSee)
+        fun bind(dataItem: DataItemDonation){
+            title.text = dataItem.eventName
+            location.text=dataItem.status
+            time.text = dataItem.deadline
+            money.text= dataItem.moneyNeed.toInt().toString()
+            seeDetail.text = dataItem.rescueTeam.name
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -42,19 +45,22 @@ class PostDonationAdapter(var context: Context): RecyclerView.Adapter<PostDonati
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var data= datalist[position]
+        var data= list[position]
+        holder.bind(data)
+        holder.itemView.setOnClickListener {
+            onDonation?.onItemClick(data)
+        }
 
-        holder.title.text= data.title
-        holder.location.text = data.location
-        holder.time.text =data.time
-        holder.money.text = data.money
-        holder.seeDetail.text= data.detail
-        holder.image.setImageResource(data.image)
     }
 
     override fun getItemCount(): Int {
-        return datalist.size
+        return list.size
+    }
+    fun addItemDonationClick(clickListener : OnDonationClick){
+        onDonation = clickListener
     }
 
-
+}
+interface OnDonationClick {
+    fun onItemClick(dataItem: DataItemDonation)
 }

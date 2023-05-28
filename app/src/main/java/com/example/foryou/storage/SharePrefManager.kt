@@ -1,6 +1,7 @@
 package com.example.foryou.storage
 
 import android.content.Context
+import com.example.foryou.Model.UserModel.LoginRespone
 import com.example.foryou.Model.UserModel.User
 
 class SharePrefManager private constructor(private val mCtx: Context) {
@@ -12,7 +13,14 @@ class SharePrefManager private constructor(private val mCtx: Context) {
         }
 
 
+    fun saveToken(token:LoginRespone){
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
 
+        editor.putString("token", token.data.accessToken)
+
+        editor.apply()
+    }
 
 //    fun saveUser(user: User) {
 //

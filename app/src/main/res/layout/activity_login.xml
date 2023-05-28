@@ -76,6 +76,7 @@
                 android:layout_margin="@dimen/_15sdp"
                 android:background="@drawable/edittext_custom"
                 android:hint="Mật Khẩuu"
+                android:inputType="textPassword"
                 android:textColorHint="@color/textcolor"
                 android:textSize="@dimen/_15ssp" />
 

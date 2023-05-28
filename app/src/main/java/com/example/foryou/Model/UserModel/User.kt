@@ -10,6 +10,7 @@ data class  User(
    val middleName:String,
    val lastName:String,
    val phoneNumber: String,
+   val rescueTeamName:String,
    val provinceId:String,
    val districtId:String,
    val wardId: String

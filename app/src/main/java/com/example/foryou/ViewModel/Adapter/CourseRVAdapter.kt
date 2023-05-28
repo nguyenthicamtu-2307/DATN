@@ -1,54 +1,47 @@
 package com.example.foryou.ViewModel.Adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foryou.Model.CourseRVModal
+import com.example.foryou.Model.Proof.ProofsItem
+import com.example.foryou.Model.RescueTem.DataItemRelief
 import com.example.foryou.R
+import com.squareup.picasso.Picasso
 
 // on below line we are creating
 // a course rv adapter class.
-class CourseRVAdapter(
-    // on below line we are passing variables
-    // as course list and context
-    private val courseList: ArrayList<CourseRVModal>,
-    private val context: Context
-) : RecyclerView.Adapter<CourseRVAdapter.CourseViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): CourseRVAdapter.CourseViewHolder {
-        // this method is use to inflate the layout file
-        // which we have created for our recycler view.
-        // on below line we are inflating our layout file.
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.rcv_image_acivity_rescue,
-            parent, false
-        )
-        // at last we are returning our view holder
-        // class with our item View File.
-        return CourseViewHolder(itemView)
+class CourseRVAdapter(): RecyclerView.Adapter<CourseRVAdapter.MyViewHolder>() {
+    private var OnReliefOnClick : OnRCVListen? = null
+    private var dataList = mutableListOf<ProofsItem>()
+
+    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val textViewName = view.findViewById<ImageView>(R.id.idIVCourse)
+        val eventType = view.findViewById<TextView>(R.id.idTVCourse)
+
+
     }
 
-    override fun onBindViewHolder(holder: CourseRVAdapter.CourseViewHolder, position: Int) {
-        // on below line we are setting data to our text view and our image view.
-        holder.courseNameTV.text = courseList.get(position).courseName
-        holder.courseIV.setImageResource(courseList.get(position).courseImg)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        var view = LayoutInflater.from(parent.context).inflate(R.layout.rcv_image_acivity_rescue, parent, false)
+        return CourseRVAdapter.MyViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        var item = dataList[position]
+        Picasso.get().load(item.imageUrl).into(holder.textViewName)
+
     }
 
     override fun getItemCount(): Int {
-        // on below line we are
-        // returning our size of our list
-        return courseList.size
+        return dataList.size
     }
-
-    class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // on below line we are initializing our course name text view and our image view.
-        val courseNameTV: TextView = itemView.findViewById(R.id.idTVCourse)
-        val courseIV: ImageView = itemView.findViewById(R.id.idIVCourse)
+    fun addRCVList(clickListener: OnRCVListen){
+        OnReliefOnClick = clickListener
     }
+}
+interface OnRCVListen {
+    fun onItemClick(dataItem: ProofsItem)
 }

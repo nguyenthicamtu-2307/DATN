@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -43,8 +44,9 @@
 
             <ImageView
                 android:id="@+id/imgDetail"
-                android:layout_width="341dp"
-                android:layout_height="169dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/imagedetail"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +65,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imgDetail" />
 
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="376dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp" />
+            <LinearLayout
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/txtDonationMoney"
+                    android:text="42.000.000"
+                    android:layout_marginEnd="@dimen/_150sdp"
+                    android:textColor="@color/secondColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/txtMoneyNeed"
+                    android:text="100.000.000"
+                    android:textColor="@color/secondColor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
             <TextView
                 android:id="@+id/txtDetail"
                 android:layout_width="match_parent"
@@ -92,12 +122,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_4sdp"
-                    android:text="Ngày bắt đầu: "
+                    android:text="Nhu yếu phầm cần : "
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtStarDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10/02/2023"
@@ -124,34 +155,10 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtFinishDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10/02/2023"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12ssp" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/lnAdressPost"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/lnDateFinsh">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_4sdp"
-                    android:text="Địa điểm: "
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_15ssp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quảng Nam"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp" />
 
@@ -162,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/lnAdressPost">
+                app:layout_constraintTop_toBottomOf="@id/lnDateFinsh">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -174,6 +181,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtRescueTeamName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ABC"
@@ -182,16 +190,18 @@
 
             </LinearLayout>
             <Button
+                android:id="@+id/btnDonation"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:text="Quyên góp "
                 android:background="@drawable/button_custom"
                 android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_100sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lnNameRescue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

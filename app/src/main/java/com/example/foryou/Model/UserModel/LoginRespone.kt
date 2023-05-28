@@ -10,5 +10,9 @@ data class LoginRespone(
 data class Data(
     val accessToken: String = "",
     val username: String = "",
-    val refreshToken: String = ""
+    val refreshToken: String = "",
+    val fullname :String,
+    val userType:String,
+    val email:String,
+    val phoneNumber:String
 )

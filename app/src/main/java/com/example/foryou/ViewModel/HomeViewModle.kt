@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foryou.Model.Event.DataItem
-import com.example.foryou.Model.Retrofit.RetrofitIntance
+
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.ViewModel.Adapter.HomeAdapter
 import retrofit2.Call

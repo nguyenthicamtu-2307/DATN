@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.foryou.Model.Contents.District
 import com.example.foryou.Model.ListItem
-import com.example.foryou.Model.Retrofit.RetrofitIntance
+
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.Model.UserModel.User
 import com.example.foryou.R

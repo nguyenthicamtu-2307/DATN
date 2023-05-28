@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Doicuutro.ReliefPlanRescue">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/lnHeaderDetail"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:src="@drawable/ic_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Kế Hoạch Cứu Trợ"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txtInfor"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/inforDonation"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lnHeaderDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:id="@+id/lnInforBank"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/txtInfor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Ngày bắt đầu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/edtStart"
+                        android:layout_width="256dp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:background="@drawable/edittext_custom"
+                        android:hint="23-07-2021"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:textColor="@color/textcolor" />
+
+                    <ImageView
+                        android:id="@+id/datePickStart"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_width="70dp"
+                        android:layout_height="62dp"
+                        android:src="@drawable/ic_calendar" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnendAt"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/lnInforBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Ngày kết thúc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/edtEndAt"
+                    android:layout_width="256dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:hint="23-07-2021"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:textColor="@color/textcolor" />
+
+
+                <ImageView
+                    android:id="@+id/datePickEnd"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="70dp"
+                    android:layout_height="62dp"
+                    android:src="@drawable/ic_calendar" />
+
+            </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnAidPackageMoney"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/lnendAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Số tiền "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/edtPackageMoney"
+                    android:text="100000"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lnAidTotalMoney"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/lnAidPackageMoney"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="DuplicateIds">
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Tổng tiền cứu trợ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/edtTotalMoney"
+                    android:text="200.000.000"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lnNeccessaryList"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:layout_constraintTop_toBottomOf="@id/lnAidTotalMoney"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:text="Vật phẩm cứu trợ  "
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/edtNeccessaryList"
+                    android:text="23-07-2021"
+                    android:textColor="@color/textcolor"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"/>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btnDonation"
+                android:text="Quyên góp"
+                android:textColor="@color/white"
+                android:fontFamily="sans-serif"
+                android:background="@drawable/button_custom"
+                android:layout_marginTop="@dimen/_50sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lnNeccessaryList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

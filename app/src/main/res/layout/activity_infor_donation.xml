@@ -6,131 +6,168 @@
     android:layout_height="match_parent"
     tools:context=".View.Donation.InforDonation">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/lnHeaderDetail"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginStart="@dimen/_15sdp"
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
+        app:layout_constraintVertical_bias="1.0">
 
-            android:layout_marginEnd="@dimen/_30sdp"
-            android:src="@drawable/ic_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:layout_marginTop="@dimen/_5sdp"
-            android:text="Thông tin quyên góp"
-            android:textColor="@color/primaryColor"
-            android:textSize="@dimen/_20ssp"
-            android:textStyle="bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-    <TextView
-        android:id="@+id/txtInfor"
-        android:layout_marginTop="@dimen/_15sdp"
-        android:text="@string/inforDonation"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_20sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lnHeaderDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <LinearLayout
-        android:id="@+id/lnInforBank"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/txtInfor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <TextView
-        android:textStyle="bold"
-        android:textColor="@color/primaryColor"
-        android:textSize="@dimen/_15ssp"
-        android:text="Thông tin tài khoản đọi cứu trợ"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-        <EditText
-            android:id="@+id/edtSTK"
-            android:text="1001010010"
-            android:textColor="@color/textcolor"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:background="@drawable/edittext_custom"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"/>
-        <EditText
-            android:id="@+id/edtNameBank"
-            android:text="Ngân hàng MB Bank"
-            android:textColor="@color/textcolor"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:background="@drawable/edittext_custom"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"/>
-        <EditText
-            android:id="@+id/edtNameChuTk"
-            android:text="NGUYEN THI CAM TU"
-            android:textColor="@color/textcolor"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:background="@drawable/edittext_custom"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"/>
-    </LinearLayout>
-    <LinearLayout
-android:id="@+id/lnNeccessary"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/lnInforBank"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/txtNeed"
-            android:textColor="@color/primaryColor"
-            android:textSize="@dimen/_15ssp"
-            android:textStyle="bold"
-            android:text="Vui lòng chọn vật phẩm muốn quyên góp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        app:layout_constraintTop_toBottomOf="@id/lnNeccessary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:hint="Select Multiple Items">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lnHeaderDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_30sdp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Thông tin quyên góp"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtInfor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:text="@string/inforDonation"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/lnHeaderDetail" />
+
+            <LinearLayout
+                android:id="@+id/lnInforBank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/txtInfor">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thông tin tài khoản đọi cứu trợ"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/edtSTK"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:text="1001010010"
+                    android:textColor="@color/textcolor" />
+
+                <EditText
+                    android:id="@+id/edtNameBank"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:hint="Ngân hàng MB Bank"
+                    android:textColor="@color/textcolor" />
+
+                <EditText
+                    android:id="@+id/edtNameChuTk"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:hint="NGUYEN THI CAM TU"
+                    android:textColor="@color/textcolor" />
+            </LinearLayout>
 
 
+            <TextView
+                android:id="@+id/txtNeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Vui lòng chọn vật phẩm muốn quyên góp"
+                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <Button
-        android:text="Quyên góp"
-        android:textColor="@color/white"
-        android:fontFamily="sans-serif"
-        android:background="@drawable/button_custom"
-        android:layout_marginTop="@dimen/_50sdp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lnNeccessary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+            <EditText
+                android:id="@+id/edtVatPham"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/edittext_custom"
+                android:hint="bánh keo,gạo..."
+                android:textColor="@color/textcolor" />
+            <TextView
+
+                android:id="@+id/txtMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:text="Vui lòng nhập sô tiền muốn quyên góp"
+                android:textColor="@color/primaryColor"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/edtMoneyDonate"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/edittext_custom"
+                android:hint="1000000"
+                android:textColor="@color/textcolor" />
+            <Button
+                android:id="@+id/btnDonate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_70sdp"
+                android:layout_marginTop="@dimen/_100sdp"
+                android:background="@drawable/button_custom"
+                android:fontFamily="sans-serif"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:text="Quyên góp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </LinearLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
