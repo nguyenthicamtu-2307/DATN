@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.foryou.Model.Proof.ProofsItem
 import com.example.foryou.Model.RescueTem.DataItemRelief
 import com.example.foryou.R
@@ -13,8 +14,8 @@ import com.squareup.picasso.Picasso
 
 // on below line we are creating
 // a course rv adapter class.
-class CourseRVAdapter(): RecyclerView.Adapter<CourseRVAdapter.MyViewHolder>() {
-    private var OnReliefOnClick : OnRCVListen? = null
+class CourseRVAdapter(private var imageUrlList: List<String>): RecyclerView.Adapter<CourseRVAdapter.MyViewHolder>() {
+
     private var dataList = mutableListOf<ProofsItem>()
 
     class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,18 +31,19 @@ class CourseRVAdapter(): RecyclerView.Adapter<CourseRVAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        var item = dataList[position]
-        Picasso.get().load(item.imageUrl).into(holder.textViewName)
+        var item = imageUrlList[position]
+        Glide.with(holder.itemView)
+            .load(item)
+            .into(holder.textViewName)
 
     }
-
+    fun setProofs(proofs: List<ProofsItem>?) {
+        imageUrlList = proofs?.map { it.imageUrl } ?: emptyList()
+        notifyDataSetChanged()
+    }
     override fun getItemCount(): Int {
-        return dataList.size
+        return imageUrlList.size
     }
-    fun addRCVList(clickListener: OnRCVListen){
-        OnReliefOnClick = clickListener
-    }
+
 }
-interface OnRCVListen {
-    fun onItemClick(dataItem: ProofsItem)
-}
+

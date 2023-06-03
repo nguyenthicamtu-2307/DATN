@@ -9,7 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -37,29 +38,17 @@
                     android:layout_height="wrap_content"/>
 
             </LinearLayout>
-            <TextView
-                app:layout_constraintStart_toStartOf="parent"
-                android:id="@+id/txtTitleDonation"
-                android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:paddingEnd="@dimen/_15sdp"
-                android:textColor="@color/black"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:textSize="@dimen/_19ssp"
-                android:text="Khung cảnh phố cổ tiêu điều vì sông nước "
-                app:layout_constraintTop_toBottomOf="@id/lnHeaderDonation2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
             <ImageView
                 android:id="@+id/imgDonation"
-                android:layout_width="333dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginTop="@dimen/_20sdp"
                 android:src="@drawable/imagedetail"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.384"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTitleDonation" />
+                tools:layout_editor_absoluteY="71dp" />
+
             <LinearLayout
                 android:id="@+id/dateChoose"
                 app:layout_constraintTop_toBottomOf="@id/imgDonation"
@@ -204,6 +193,7 @@
                     android:src="@drawable/ic_upload" />
 
                 <TextView
+                    android:id="@+id/txtUpload"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -213,12 +203,20 @@
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
             </LinearLayout>
+            <TextView
+                android:id="@+id/txtUrlImange"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:textSize="@dimen/_15sdp"
+                android:text="bababa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
             <LinearLayout
                 android:layout_marginTop="@dimen/_40sdp"
                 app:layout_constraintTop_toBottomOf="@id/lnUploadDonation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
+                    android:id="@+id/btnXacNhan"
                     android:text="Xác nhận"
                     android:textColor="@color/white"
                     android:fontFamily="serif"
@@ -229,6 +227,7 @@
                     android:layout_height="wrap_content"/>
                 <Button
                     android:text="Hủy"
+
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:fontFamily="serif"
@@ -237,7 +236,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

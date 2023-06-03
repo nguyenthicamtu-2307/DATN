@@ -8,7 +8,6 @@ data class EventRescueTeam(
 )
 
 data class DataItemResCue(
-    val closedBy: String,
     val year: Int = 0,
     val description: String = "",
     val type: String = "",

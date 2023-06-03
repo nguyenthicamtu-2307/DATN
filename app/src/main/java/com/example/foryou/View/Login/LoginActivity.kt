@@ -1,38 +1,31 @@
 package com.example.foryou.View.Login
 
-import android.annotation.SuppressLint
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.Model.UserModel.LoginRequest
 import com.example.foryou.Model.UserModel.LoginRespone
-import com.example.foryou.Model.UserModel.UserReponsitory
-import com.example.foryou.R
 import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.View.Register.RegisterActivity
-import com.example.foryou.ViewModel.RegisterViewModel
 import com.example.foryou.databinding.ActivityLoginBinding
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -73,15 +66,35 @@ class LoginActivity : AppCompatActivity() {
             binding.txtPass.requestFocus()
         }
     }
-
+    private fun showAlertDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Login fail")
+        alertDialogBuilder.setMessage("Bạn nhập sai tên đăng nhập hoặc tài khoản. Vui lòng nhập lại")
+        alertDialogBuilder.setPositiveButton("Đồng ý") { dialog, which ->
+            alertDialogBuilder.setCancelable(true)
+        }
+        alertDialogBuilder.setNegativeButton("Hủy") { dialog, which ->
+            // Xử lý sự kiện khi người dùng chọn Hủy
+            dialog.dismiss()
+        }
+        alertDialogBuilder.show()
+    }
     fun initViewModel() {
+
         var username =binding.spnUserType.selectedItem.toString() + "|" + binding.txtUsername.text.toString()
         var password = binding.txtPass.text.toString()
 
+        if (username.isEmpty() || password.isEmpty()){
+            val alter: AlertDialog.Builder = AlertDialog.Builder(this)
+            alter.setTitle("Nhập thiếu thông tin")
+            alter.setMessage("Bạn nhập thiếu thông tin. Vui lòng nhập lại!")
+            alter.setPositiveButton("OK",
+                DialogInterface.OnClickListener { dialogInterface, i -> alter.setCancelable(true) })
+        }
         val loginRequest = LoginRequest(username, password)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http:/192.168.143.2:3000/relief-app/v1/"
+        val baseURL = "http:/192.168.1.4:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -109,6 +122,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                         Log.d("tokern",token)
                     }else{
+
                         val errorMessage =response.code()
                         Log.e("errorTK",errorMessage.toString())
                     }
@@ -129,7 +143,7 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra("userType",item)
                     startActivity(intent)
                 }else{
-
+                    showAlertDialog()
                     Toast.makeText(this@LoginActivity,"Login fail!! try again",Toast.LENGTH_SHORT).show()
 
                 }
@@ -170,10 +184,14 @@ class LoginActivity : AppCompatActivity() {
 
     }
     fun retrofit() {
-
+        val alter: AlertDialog.Builder = AlertDialog.Builder(this)
+        alter.setTitle("Nhập thiếu thông tin")
+        alter.setMessage("Bạn nhập thiếu thông tin. Vui lòng nhập lại!")
+        alter.setPositiveButton("OK",
+            DialogInterface.OnClickListener { dialogInterface, i -> alter.setCancelable(true) })
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()

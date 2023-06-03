@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,56 +10,109 @@
 
     <!--on below line we are creating
         a text for heading of our app-->
-    <TextView
-        android:id="@+id/idTVHeading"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:padding="4dp"
-        android:text="Grid Layout Manager"
-        android:textAlignment="center"
-        android:textColor="@color/purple_200"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent">
+        <RelativeLayout
 
-    <!--on below line we are creating a recycler view-->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idRVCourses"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/idTVHeading" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="119dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:src="@drawable/imange6" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/btnUpload"
-            android:text="Upload"
-            android:textColor="@color/white"
-            android:layout_marginStart="@dimen/_35sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:background="@drawable/confirm_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:id="@+id/confirm"
-            android:text="Xác nhận"
-            android:textColor="@color/white"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:background="@drawable/cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/idTVHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="Grid Layout Manager"
+                android:textAlignment="center"
+                android:textColor="@color/purple_200"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-</LinearLayout>
+            <!--on below line we are creating a recycler view-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/idRVCourses"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/idTVHeading" />
+
+            <LinearLayout
+               android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:id="@+id/lnUploadDonation"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_below="@+id/idRVCourses"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/edittext_custom"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:backgroundTint="@color/primaryColor"
+                    android:src="@drawable/ic_upload" />
+
+                <TextView
+                    android:id="@+id/txtUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="Upload hình ảnh"
+                    android:textAlignment="center"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtUrlHinhAnh"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_below="@id/lnUploadDonation"
+                android:text="test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_below="@id/txtUrlHinhAnh"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <Button
+                    android:id="@+id/btnUpload"
+                    android:text="Upload"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_35sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:background="@drawable/confirm_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:id="@+id/confirm"
+                    android:text="Xác nhận"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_50sdp"
+                    android:background="@drawable/cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

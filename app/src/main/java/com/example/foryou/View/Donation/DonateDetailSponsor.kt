@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.Model.Soponsor.IdDonateDetail
@@ -33,6 +34,10 @@ class DonateDetailSponsor : AppCompatActivity() {
             var intent = Intent(this,UpdateDonateInfor::class.java)
             startActivity(intent)
         }
+        binding.btnPost.setOnClickListener {
+            var intent = Intent(this,InforDonation2::class.java)
+            startActivity(intent)
+        }
     }
     fun getIdDetail(){
 
@@ -44,7 +49,7 @@ class DonateDetailSponsor : AppCompatActivity() {
     fun getDetailDonateId(id:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -69,7 +74,10 @@ class DonateDetailSponsor : AppCompatActivity() {
                     binding.txtAmountOfMoney.text = data?.data?.rescueTeam?.name
                     binding.txtHouseHoldNumber.text = data?.data?.status
                     binding.txtNessessary.text = data?.data?.neccessariesList
-                    binding.txtStatusSub.text = data?.data?.moneyTransferReceiptImgUrl
+                    var imange = data?.data?.moneyTransferReceiptImgUrl
+                    Glide.with(this@DonateDetailSponsor)
+                        .load(imange)
+                        .into(binding.txtStatusSub)
                     binding.txtNameLocalOfficer.text = data?.data?.money.toString()
                     binding.txtUrl.text= data?.data?.deadline
                 }else{

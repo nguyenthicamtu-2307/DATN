@@ -11,6 +11,14 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:padding="16dp" />
+    <TextView
+        android:id="@+id/txtImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UrlImage"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:padding="16dp" />
     <Button
         android:id="@+id/buttonSelectImage"
         android:layout_width="match_parent"

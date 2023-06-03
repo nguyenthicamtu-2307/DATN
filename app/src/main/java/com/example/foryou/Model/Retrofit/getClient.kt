@@ -7,13 +7,8 @@ import com.example.foryou.Model.Contents.WardsRespon
 import com.example.foryou.Model.Donation.*
 import com.example.foryou.Model.Event.*
 import com.example.foryou.Model.Event.Event
-import com.example.foryou.Model.LocalOfficer.DetailRegisSub
-import com.example.foryou.Model.LocalOfficer.EditSubRespone
-import com.example.foryou.Model.LocalOfficer.EditSubscription
-import com.example.foryou.Model.LocalOfficer.ManagerRescueAction
-import com.example.foryou.Model.Proof.ProofRequest
-import com.example.foryou.Model.Proof.ProofRescue
-import com.example.foryou.Model.Proof.ProofRespone
+import com.example.foryou.Model.LocalOfficer.*
+import com.example.foryou.Model.Proof.*
 import com.example.foryou.Model.RescueTem.*
 import com.example.foryou.Model.Soponsor.*
 import com.example.foryou.Model.UserModel.LoginRequest
@@ -108,12 +103,13 @@ interface getClient {
 
     @GET("rescue-team/rescue-subscriptions/{id}/proofs/{id}") //relief-app/v1/rescue-team/rescue-subscriptions/{id}/proofs/{id}
     fun getProof(@Path("id") id: String):Call<ProofRescue>
-    @Multipart
+
     @POST("rescue-team/rescue-subscriptions/{id}/proofs")
      fun uploadImage(@Path("id") id: String,
-                            @Part image: MultipartBody.Part
+                     @Body request :ProofRequest
      ):Call<ProofRespone>
-
+    @GET("local-officers/rescue-action") //relief-app/v1/local-officers/rescue-action
+    fun getListAction():Call<ListRescueAction>
 
     //Soponsor
     @GET("sponsor/donation-posts")
@@ -136,4 +132,18 @@ interface getClient {
     @PATCH("rescue-team/donation-posts/{id}") //relief-app/v1/
     fun confirmFinishDonationPost(@Body request :FinishDonationPost,
     @Path("id") id:String):Call<FinishDonationPostRespone>
+
+    @POST("sponsor/donations/{id}/proofs") //relief-app/v1/sponsor/donations/{id}/proofs
+    fun postProof( @Path("id") id:String,
+                   @Body request :ProofRequest): Call<ProofRespone>
+    @PATCH("local-officers/event-subscriptions/{id}/rescue-action/{id}") //relief-app/v1/local-officers/event-subscriptions/{id}/rescue-action/{id}
+    fun conFirmRescueActionOfLocalOfficer(
+        @Body request :ConfirmRescueActionRequest,
+        @Path("id") id:String
+    ):Call<ConfirmRescueActionRespone>
+    @PATCH("rescue-team/rescue-subscriptions/{id}") //relief-app/v1/rescue-team/rescue-subscriptions/{id}
+    fun conFirmRescueSubscription(
+        @Path("id") id:String,
+        @Body request :RescueSubProofRequest
+    ):Call<RescueSubProofRespone>
 }

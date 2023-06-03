@@ -47,7 +47,7 @@ class InforDonation : AppCompatActivity() {
         var donateRequest = PostDonate(money.toInt(),neccess)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()

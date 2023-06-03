@@ -6,5 +6,6 @@ data class ProofRescue(val code: Int = 0,
                        val timestamp: Long = 0)
 data class DataProof(val proofs: List<ProofsItem>?)
 data class ProofsItem(val createdAt: String = "",
-                      val imageUrl: String = "",
-                      val id: String = "")
+                      val id: String = "",
+                      val imageUrl: String = ""
+                     )

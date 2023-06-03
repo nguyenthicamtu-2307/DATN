@@ -6,7 +6,9 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentResolver
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -17,18 +19,20 @@ import android.provider.OpenableColumns
 import android.util.Log
 import android.view.Window
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.foryou.Model.Proof.ProofRescue
-import com.example.foryou.Model.Proof.ProofRespone
-import com.example.foryou.Model.Proof.ProofsItem
+import com.example.foryou.Model.LocalOfficer.ConfirmRescueActionRequest
+import com.example.foryou.Model.LocalOfficer.ConfirmRescueActionRespone
+import com.example.foryou.Model.Proof.*
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.R
 import com.example.foryou.ViewModel.Adapter.CourseRVAdapter
-import com.example.foryou.ViewModel.Adapter.OnRCVListen
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -52,7 +56,8 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 
-class ActivitySumaryImage : AppCompatActivity(), OnRCVListen {
+class ActivitySumaryImage : AppCompatActivity() {
+    private val REQUEST_CODE_IMAGE = 1
 
     private var selectImageUri: Uri? = null
     private lateinit var binding: ActivityImageActivityRescueBinding
@@ -62,26 +67,18 @@ class ActivitySumaryImage : AppCompatActivity(), OnRCVListen {
     // recycler view, adapter and list.
     lateinit var courseRV: RecyclerView
     private lateinit var adapterView: CourseRVAdapter
-    private val PICK_IMAGE_REQUEST = 1
-    private val SELECT_IMAGE_REQUEST_CODE = 1
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = ActivityImageActivityRescueBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // on below line we are initializing
-        // our views with their ids.
-
-
-        // on below line we are notifying adapter
-        // that data has been updated.
         setOnClick()
         getId()
 
     }
 
-     fun getId() {
+    fun getId() {
         val sharedId = getSharedPreferences("MyReliefId", Context.MODE_PRIVATE)
         val idDetail = sharedId?.getString("ReliefId", "")
 //          val data_: String? = intent.getStringExtra("id")
@@ -96,7 +93,7 @@ class ActivitySumaryImage : AppCompatActivity(), OnRCVListen {
         courseRV = findViewById(R.id.idRVCourses)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -115,27 +112,27 @@ class ActivitySumaryImage : AppCompatActivity(), OnRCVListen {
 
                 if (response.isSuccessful) {
                     val data = response.body()?.data?.proofs
-                    val listProvince = mutableListOf<String>()
-                    if (data != null) {
-                        for (i in data.indices) {
-                            data[i].imageUrl.let {
-                                listProvince.add(
-                                    it
-                                )
-                            }
-                        }
+                    Log.d("imange",data.toString())
+                    if (data != null){
+                        adapterView = CourseRVAdapter(emptyList())
+                        courseRV.adapter = adapterView
+                        courseRV.layoutManager = LinearLayoutManager(this@ActivitySumaryImage)
+                        adapterView.setProofs(data)
+
+                    }else{
+                        Toast.makeText(this@ActivitySumaryImage,"NUll",Toast.LENGTH_SHORT).show()
                     }
-                    adapterView = CourseRVAdapter()
-                    courseRV.adapter = adapterView
-                    courseRV.layoutManager = GridLayoutManager(this@ActivitySumaryImage, 2)
-
-
-                } else {
-                    Toast.makeText(this@ActivitySumaryImage, response.message(), Toast.LENGTH_SHORT)
+                }else {
+                    Toast.makeText(
+                        this@ActivitySumaryImage,
+                        response.message(),
+                        Toast.LENGTH_SHORT
+                    )
                         .show()
 
                 }
             }
+
 
             override fun onFailure(call: Call<ProofRescue>, t: Throwable) {
                 Toast.makeText(this@ActivitySumaryImage, "${t}", Toast.LENGTH_SHORT).show()
@@ -145,89 +142,104 @@ class ActivitySumaryImage : AppCompatActivity(), OnRCVListen {
         })
     }
 
-    override fun onItemClick(dataItem: ProofsItem) {
+
+
+
+    fun requestPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        )
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                REQUEST_CODE_IMAGE
+            )
+        else launchImagePicker()
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE_IMAGE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                launchImagePicker()
+            else {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                    REQUEST_CODE_IMAGE
+                )
 
-//    private fun getImagePath(uri: Uri?): String? {
-//        val projection = arrayOf(MediaStore.Images.Media.DATA)
-//        val cursor = contentResolver.query(uri!!, projection, null, null, null)
-//        val columnIndex = cursor?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-//        cursor?.moveToFirst()
-//        val imagePath = cursor?.getString(columnIndex!!)
-//        cursor?.close()
-//        return imagePath
-//    }
+            }
+        }
+    }
 
-    fun openGrary() {
+    private fun launchImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, PICK_IMAGE_REQUEST)
-
+        startActivityForResult(intent, REQUEST_CODE_IMAGE)
     }
 
-    fun setOnClick() {
-
-        binding.btnUpload.setOnClickListener {
-            showSelectImageDialog()
-        }
-    }
-
-    private fun showSelectImageDialog() {
-        val dialogView = layoutInflater.inflate(R.layout.dialog_image_custom, null)
-        val buttonSelectImage = dialogView.findViewById<Button>(R.id.buttonSelectImage)
-
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setTitle("Select Image")
-
-        val dialog = dialogBuilder.create()
-
-        buttonSelectImage.setOnClickListener {
-            // Gọi Intent để chọn hình ảnh từ thiết bị
-            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(intent, SELECT_IMAGE_REQUEST_CODE)
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
+    @SuppressLint("MissingInflatedId")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val selectedImageUri: Uri? = data?.data
+        if (requestCode == REQUEST_CODE_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri = data.dataString
+            val selectedImagePath =
+                selectedImageUri?.let { getURLFromImagePath(context = baseContext, it) }
+            val imageFile = File(selectedImagePath)
+            if (imageFile.exists()) {
+                binding.txtUrlHinhAnh.text = "https://${selectedImagePath?.substring(1)}"
 
-            // Lấy đường dẫn thực của hình ảnh đã chọn từ Uri
-            val imagePath: String? = selectedImageUri?.let { uri ->
-                getImagePathFromUri(uri)
-            }
 
-            // Kiểm tra và gửi hình ảnh lên API
-            if (imagePath != null) {
-                uploadImageToApi(imagePath)
+            } else {
+                Toast.makeText(this, "Không tìm thấy tập tin ảnh", Toast.LENGTH_SHORT).show()
             }
         }
     }
-    @SuppressLint("Range")
-    private fun getImagePathFromUri(uri: Uri): String? {
-        // Lấy đường dẫn thực của hình ảnh từ Uri
-        val cursor = contentResolver.query(uri, null, null, null, null)
-        cursor?.use {
-            if (it.moveToFirst()) {
-                val imagePath = it.getString(it.getColumnIndex(MediaStore.Images.Media.DATA))
-                return imagePath
+
+    fun getURLFromImagePath(context: Context, imagePath: String): String? {
+        val contentResolver: ContentResolver = context.contentResolver
+        val uri: Uri = Uri.parse(imagePath)
+
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        var cursor: Cursor? = null
+
+        try {
+            cursor = contentResolver.query(uri, projection, null, null, null)
+            if (cursor != null && cursor.moveToFirst()) {
+                val columnIndex: Int = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                return cursor.getString(columnIndex)
             }
+        } finally {
+            cursor?.close()
         }
+
         return null
     }
+
+    fun getImageUrl(){
+        val sharedId = getSharedPreferences("MyReliefId", Context.MODE_PRIVATE)
+        val idDetail = sharedId?.getString("ReliefId", "")
+//          val data_: String? = intent.getStringExtra("id")
+//
+        Log.d("idShare", idDetail.toString())
+        uploadImageToApi(idDetail.toString())
+    }
     private fun uploadImageToApi(id: String) {
-        val imagePath = File(selectImageUri?.path)
-        val imageFile = RequestBody.create("image/*".toMediaTypeOrNull(), imagePath)
-        val imagePart = MultipartBody.Part.createFormData("image", imagePath.toString(), imageFile)
+        var url = binding.txtUrlHinhAnh.text
+        var emptyList : List<DonationDetailImagesItem> = listOf(DonationDetailImagesItem(url.toString()))
+
+        var fromBoolean: Boolean = true
+        var request = ProofRequest(url.toString(), url.toString(),emptyList, fromBoolean)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -241,24 +253,115 @@ class ActivitySumaryImage : AppCompatActivity(), OnRCVListen {
             .build()
 
         val api = retrofit.create(getClient::class.java)
-        api.uploadImage(id,imagePart).enqueue(object : Callback<ProofRespone>{
+        api.uploadImage(id,request ).enqueue(object : Callback<ProofRespone> {
             override fun onResponse(call: Call<ProofRespone>, response: Response<ProofRespone>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     Log.e("API", "Lỗi khi lấy dữ liệu: ${response.message()}")
-                    Toast.makeText(this@ActivitySumaryImage,"Post successfull", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ActivitySumaryImage, "Post successfull", Toast.LENGTH_SHORT)
+                        .show()
 
-                }else{
-                    Toast.makeText(this@ActivitySumaryImage,response.message(), Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@ActivitySumaryImage, response.message(), Toast.LENGTH_SHORT)
+                        .show()
 
                 }
             }
 
             override fun onFailure(call: Call<ProofRespone>, t: Throwable) {
-                Toast.makeText(this@ActivitySumaryImage,"${t}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ActivitySumaryImage, "${t}", Toast.LENGTH_SHORT).show()
 
             }
 
         })
 
+    }
+    fun getProofID(){
+        val sharedId = getSharedPreferences("MyReliefId", Context.MODE_PRIVATE)
+        val idDetail = sharedId?.getString("ReliefId", "")
+//          val data_: String? = intent.getStringExtra("id")
+//
+        Log.d("idShare", idDetail.toString())
+        showDialog(idDetail.toString())
+    }
+    private fun showDialog(id:String) {
+
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_custom)
+
+        val textViewMessage = dialog.findViewById<TextView>(R.id.textViewMessage)
+        val buttonYes = dialog.findViewById<Button>(R.id.buttonYes)
+        val buttonNo = dialog.findViewById<Button>(R.id.buttonNo)
+
+        textViewMessage.text = "Are you sure?"
+        buttonYes.text = "finish"
+        var fromMobile :Boolean = true
+        var requets = RescueSubProofRequest("markAsDone",fromMobile)
+        buttonYes.setOnClickListener {
+            // Xử lý khi nút Yes được nhấn
+            var loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+            val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+            //
+            val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
+            val client = OkHttpClient.Builder()
+                .addInterceptor(MyInterceptors(sharedPreferences))
+                .addInterceptor(loggingInterceptor)
+                .build()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(baseURL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val api = retrofit.create(getClient::class.java)
+            api.conFirmRescueSubscription(id,requets).enqueue(object : Callback<RescueSubProofRespone>{
+                override fun onResponse(
+                    call: Call<RescueSubProofRespone>,
+                    response: Response<RescueSubProofRespone>
+                ) {
+                    if (response.isSuccessful){
+                        var dataPost = response.body()
+                        Toast.makeText(this@ActivitySumaryImage,"Post successfull", Toast.LENGTH_SHORT).show()
+                        var intent = Intent(this@ActivitySumaryImage,ActivitySumaryImage::class.java)
+                        startActivity(intent)
+
+                    }else{
+                        Toast.makeText(this@ActivitySumaryImage,response.message(), Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+                override fun onFailure(call: Call<RescueSubProofRespone>, t: Throwable) {
+                    Toast.makeText(this@ActivitySumaryImage,"${t}", Toast.LENGTH_SHORT).show()
+
+                }
+
+            })
+        }
+
+        buttonNo.setOnClickListener {
+            // Xử lý khi nút No được nhấn
+            dialog.dismiss()
+        }
+
+        dialog.setOnDismissListener(DialogInterface.OnDismissListener {
+            // Xử lý khi hộp thoại được đóng
+        })
+
+        dialog.show()
+    }
+
+    fun setOnClick() {
+
+        binding.lnUploadDonation.setOnClickListener {
+            requestPermission()
+        }
+        binding.btnUpload.setOnClickListener {
+            getImageUrl()
+        }
+
+        binding.confirm.setOnClickListener {
+            getProofID()
+        }
     }
 }
