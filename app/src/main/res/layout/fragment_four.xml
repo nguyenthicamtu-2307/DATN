@@ -48,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/txtFullName"
             android:text="Nguyễn Thị Cẩm Tú"
             android:layout_marginStart="@dimen/_80sdp"
             android:layout_marginTop="@dimen/_10sdp"
@@ -56,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
+            android:id="@+id/txtEmail"
             android:text="abcd@gmail.com"
             android:layout_marginStart="@dimen/_85sdp"
             android:layout_marginTop="@dimen/_5sdp"
@@ -179,6 +181,7 @@
                 android:layout_height="wrap_content"/>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/lnLogout"
             android:layout_marginTop="@dimen/_30sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"

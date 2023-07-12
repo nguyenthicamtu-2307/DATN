@@ -76,7 +76,7 @@
                         android:layout_width="256dp"
                         android:layout_height="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:background="@drawable/edittext_custom"
                         android:hint="23-07-2021"
                         android:paddingTop="@dimen/_10sdp"
@@ -117,8 +117,8 @@
                     android:id="@+id/edtEndAt"
                     android:layout_width="256dp"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:background="@drawable/edittext_custom"
                     android:hint="23-07-2021"
                     android:paddingTop="@dimen/_10sdp"
@@ -154,7 +154,7 @@
                     android:layout_height="wrap_content"/>
                 <EditText
                     android:id="@+id/edtPackageMoney"
-                    android:text="100000"
+                    android:hint="100000"
                     android:textColor="@color/textcolor"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/edittext_custom"
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content"/>
                 <EditText
                     android:id="@+id/edtTotalMoney"
-                    android:text="200.000.000"
+                    android:hint="200.000.000"
                     android:textColor="@color/textcolor"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/edittext_custom"
@@ -208,7 +208,7 @@
                     android:layout_height="wrap_content"/>
                 <EditText
                     android:id="@+id/edtNeccessaryList"
-                    android:text="23-07-2021"
+                    android:hint="23-07-2021"
                     android:textColor="@color/textcolor"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:background="@drawable/edittext_custom"

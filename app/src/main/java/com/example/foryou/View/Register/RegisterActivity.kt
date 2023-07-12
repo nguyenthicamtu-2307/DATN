@@ -98,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
 
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -183,7 +183,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun loadDistrictsByProvinceId(provinceId: String) {
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -257,7 +257,7 @@ class RegisterActivity : AppCompatActivity() {
     fun getWards(district: String) {
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -326,9 +326,56 @@ class RegisterActivity : AppCompatActivity() {
         })
 
     }
-
+ fun checkContion(){
+     val email = binding.tvEmailQg.text.toString()
+     val passWord = binding.edtMatKhauQg.text.toString()
+     val firstName = binding.edtFirstName.text.toString()
+     val middleName = binding.edtMiddleName.text.toString()
+     val lastName= binding.edtLastName.text.toString()
+     val phone = binding.edtPhoneNumber.text.toString()
+     var username = binding.edtUsername.text.toString()
+     if(email.isEmpty()){
+         binding.tvEmailQg.error = "Email required"
+         binding.tvEmailQg.requestFocus()
+     }
+     if(passWord.isEmpty()){
+         binding.edtMatKhauQg.error = "Password required"
+         binding.edtMatKhauQg.requestFocus()
+     }
+     if(firstName.isEmpty()){
+         binding.edtFirstName.error = "FisrtName required"
+         binding.edtFirstName.requestFocus()
+     }
+     if(middleName.isEmpty()){
+         binding.edtMiddleName.error = "Middle required"
+         binding.edtMiddleName.requestFocus()
+     }
+     if(lastName.isEmpty()){
+         binding.edtLastName.error = "LastName required"
+         binding.edtLastName.requestFocus()
+     }
+     if(phone.isEmpty()){
+         binding.edtPhoneNumber.error = "Phone required"
+         binding.edtPhoneNumber.requestFocus()
+     }
+     if(username.isEmpty()){
+         binding.edtUsername.error = "UserName required"
+         binding.edtUsername.requestFocus()
+     }
+ }
     fun registerUser() {
+        var Type :String
         val usertype= binding.autoComplete.selectedItem.toString()
+        if (usertype == "Đội cứu trợ")
+        {
+            Type = "RESCUE_TEAM"
+        }else{
+            if (usertype == "Cán bộ"){
+                Type = "LOCAL_OFFICER"
+            }else{
+                Type ="SPONSOR"
+            }
+        }
         val email = binding.tvEmailQg.text.toString()
         val passWord = binding.edtMatKhauQg.text.toString()
         val firstName = binding.edtFirstName.text.toString()
@@ -337,43 +384,49 @@ class RegisterActivity : AppCompatActivity() {
         val phone = binding.edtPhoneNumber.text.toString()
         var username = binding.edtUsername.text.toString()
 
-        var user = User(usertype,email,passWord,firstName,middleName,lastName,phone,username,provinceId,districtId,selectSpinnerId)
-        Log.d("user",user.toString())
-        var loggingInterceptor =
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
-        //
-        val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
-        val client = OkHttpClient.Builder()
-            .addInterceptor(MyInterceptors(sharedPreferences))
-            .addInterceptor(loggingInterceptor)
-            .build()
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseURL)
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+        var user = User(Type,email,passWord,firstName,middleName,lastName,phone,username,provinceId,districtId,selectSpinnerId)
+        if (username.isEmpty() || passWord.isEmpty() || firstName.isEmpty() || middleName.isEmpty() ||
+                lastName.isEmpty() || lastName.isEmpty() || phone.isEmpty() || username.isEmpty()){
+            checkContion()
+        }else{
+            var loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+            val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
+            //
+            val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
+            val client = OkHttpClient.Builder()
+                .addInterceptor(MyInterceptors(sharedPreferences))
+                .addInterceptor(loggingInterceptor)
+                .build()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(baseURL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
-        val api = retrofit.create(getClient::class.java)
-        val call = api.register(user)
-        call.enqueue(object : Callback<User>{
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if (response.isSuccessful) {
-                    val intent = Intent(this@RegisterActivity , LoginActivity::class.java)
-                    startActivity(intent)
-                } else {
-                    // Xử lý lỗi
-                    val errorMessage = response.errorBody()?.string()
-                    Log.e("abc",errorMessage.toString())
-                    Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
+            val api = retrofit.create(getClient::class.java)
+            val call = api.register(user)
+            call.enqueue(object : Callback<User>{
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        val intent = Intent(this@RegisterActivity , LoginActivity::class.java)
+                        startActivity(intent)
+                    } else {
+                        // Xử lý lỗi
+                        val errorMessage = response.errorBody()?.string()
+                        Log.e("abc",errorMessage.toString())
+                        Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Toast.makeText(this@RegisterActivity, "Lỗi: ${t.message}", Toast.LENGTH_SHORT).show()
-            }
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    Toast.makeText(this@RegisterActivity, "Lỗi: ${t.message}", Toast.LENGTH_SHORT).show()
+                }
 
-        })
+            })
+        }
+        Log.d("user",user.toString())
+
     }
 
 }

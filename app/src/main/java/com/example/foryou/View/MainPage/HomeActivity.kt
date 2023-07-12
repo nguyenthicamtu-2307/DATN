@@ -49,9 +49,9 @@ class HomeActivity : AppCompatActivity() {
 
         val bottomView = binding.nav
         val intent = intent
-        val data_: String? = intent.getStringExtra("userType")
+        val userType = getSharedPreferences("UserType", Context.MODE_PRIVATE)
+        val type = userType?.getString("userType", "")
         val token_:String?= intent.getStringExtra("token")
-        Log.d("usertype", data_.toString())
         Log.d("token", token_.toString())
         val sharedPref = getSharedPreferences("MyRef", Context.MODE_PRIVATE)
         val myString = sharedPref?.getString("token", "")
@@ -61,25 +61,25 @@ class HomeActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.navHome -> makeCurrentFragment(homeFragment)
                 R.id.navManager -> {
-                    if (data_ == "rescue_team") {
+                    if (type == "rescue_team") {
                         makeCurrentFragment(planAid)
                     } else {
-                        if (data_ == "local_officer") {
+                        if (type == "local_officer") {
                             makeCurrentFragment(managerAid)
                         } else {
-                            if (data_ == "sponsor")
+                            if (type == "sponsor")
                                 makeCurrentFragment(donationList)
                         }
                     }
                 }
                 R.id.navHistory -> {
-                    if (data_ == "rescue_team") {
+                    if (type == "rescue_team") {
                         makeCurrentFragment(manager)
                     } else {
-                        if (data_ == "local_officer") {
+                        if (type == "local_officer") {
                             makeCurrentFragment(activityAid)
                         } else {
-                            if (data_ == "sponsor")
+                            if (type == "sponsor")
                                 makeCurrentFragment(historyDonation)
                         }
                     }

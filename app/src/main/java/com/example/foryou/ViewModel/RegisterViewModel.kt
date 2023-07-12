@@ -30,7 +30,7 @@ class RegisterViewModel : ViewModel() {
     val dropdownModel: LiveData<List<String>>
         get() = options
     init {
-        val list= listOf("LOCAL_OFFICER", "RESCUE_TEAM", "SPONSOR")
+        val list= listOf("Đội cứu trợ", "Cán bộ", "Mạnh thường quân")
         // Thiết lập danh sách các lựa chọn
         options.value = list
 

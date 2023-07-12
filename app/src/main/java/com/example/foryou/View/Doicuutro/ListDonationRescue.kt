@@ -16,6 +16,7 @@ import com.example.foryou.Model.RescueTem.FinishDonationPostRespone
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.R
+import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.databinding.ActivityListDonationRescueBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -24,6 +25,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ListDonationRescue : AppCompatActivity() {
     private lateinit var binding : ActivityListDonationRescueBinding
@@ -33,6 +36,12 @@ class ListDonationRescue : AppCompatActivity() {
         setContentView(binding.root)
         OnClickListener()
         getID()
+    }
+    fun setOnClick(){
+        binding.imgHome.setOnClickListener {
+            var intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
     }
     fun getID(){
         val sharedId = getSharedPreferences("DonationId", Context.MODE_PRIVATE)
@@ -45,7 +54,7 @@ class ListDonationRescue : AppCompatActivity() {
     fun getDetailDonation(id:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.143.2:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -70,8 +79,20 @@ class ListDonationRescue : AppCompatActivity() {
                     binding.txtStartTime.text = dataDetail?.data?.donatedMoney?.toString()
 
                     binding.txtYear.text = dataDetail?.data?.moneyNeed.toString()
-                    binding.txtDeadline.text = dataDetail?.data?.deadline
+                   var deadline = dataDetail?.data?.deadline
                     binding.txtStatus.text = dataDetail?.data?.status
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(deadline)
+
+                        val formattedDate = outputFormat.format(date)
+                        binding.txtDeadline.text = formattedDate.toString()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
 
                 }else{
                     Toast.makeText(this@ListDonationRescue,response.message(), Toast.LENGTH_SHORT).show()
@@ -116,7 +137,7 @@ class ListDonationRescue : AppCompatActivity() {
             // Xử lý khi nút Yes được nhấn
             var loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-            val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+            val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
             //
             val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
             val client = OkHttpClient.Builder()
@@ -137,8 +158,9 @@ class ListDonationRescue : AppCompatActivity() {
                 ) {
                     if (response.isSuccessful){
                         var dataPost = response.body()
-                        Toast.makeText(this@ListDonationRescue,"Post successfull", Toast.LENGTH_SHORT).show()
-
+                        Toast.makeText(this@ListDonationRescue,"Bạn đã đóng bài đăng kêu gọi", Toast.LENGTH_SHORT).show()
+                        var intent = Intent(this@ListDonationRescue,ListDonationRescue::class.java)
+                        startActivity(intent)
                     }else{
                         Toast.makeText(this@ListDonationRescue,response.message(), Toast.LENGTH_SHORT).show()
 

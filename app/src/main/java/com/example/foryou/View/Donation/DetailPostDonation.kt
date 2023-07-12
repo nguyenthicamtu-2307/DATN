@@ -20,6 +20,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailPostDonation : AppCompatActivity() {
     private lateinit var binding: ActivityDetailPostDonationBinding
@@ -52,7 +54,7 @@ class DetailPostDonation : AppCompatActivity() {
         var endDate = binding.txtFinishDate
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -71,16 +73,37 @@ class DetailPostDonation : AppCompatActivity() {
                 if (response.isSuccessful) {
                     var data = response.body()
                     description.text = data?.data?.description
-                    endDate.text = data?.data?.deadline
+                    var finishDate = data?.data?.deadline
                     currentMoney.text = data?.data?.donatedMoney?.toInt().toString()
                     neccess.text = data?.data?.necessariesList
                     needMoney.text = data?.data?.moneyNeed.toString()
-
+                    var bank = data?.data?.bank
+                    var bankNumber = data?.data?.bankAccountNumber
+                    val sharedPref = getSharedPreferences("Bank", Context.MODE_PRIVATE)
+                    if (sharedPref != null) {
+                        with(sharedPref.edit()) {
+                            putString("bank", bank.toString())
+                            putString("bankNumber",bankNumber.toString())
+                            apply()
+                        }
+                    }
                     var money1: Double = needMoney.text.toString().toDouble()
                     var money2: Double = currentMoney.text.toString().toDouble()
                     var progressItem = ((money2 / money1) * (prercent / 100))
                     process.setProgress(progressItem.toInt())
                     process.progressTintList = ColorStateList.valueOf(Color.RED)
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(finishDate)
+
+                        val formattedDate = outputFormat.format(date)
+                        endDate.text = formattedDate.toString()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 } else {
                     Toast.makeText(this@DetailPostDonation, response.message(), Toast.LENGTH_SHORT)
                         .show()

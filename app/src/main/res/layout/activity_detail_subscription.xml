@@ -25,6 +25,7 @@
                     android:src="@drawable/imagedetail" />
 
                 <ImageView
+                    android:id="@+id/imBack"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:src="@drawable/ic_back"

@@ -93,7 +93,7 @@ class ActivitySumaryImage : AppCompatActivity() {
         courseRV = findViewById(R.id.idRVCourses)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -194,7 +194,7 @@ class ActivitySumaryImage : AppCompatActivity() {
                 selectedImageUri?.let { getURLFromImagePath(context = baseContext, it) }
             val imageFile = File(selectedImagePath)
             if (imageFile.exists()) {
-                binding.txtUrlHinhAnh.text = "https://${selectedImagePath?.substring(1)}"
+                binding.txtUrlHinhAnh.text = selectedImagePath?.substring(1)
 
 
             } else {
@@ -239,7 +239,7 @@ class ActivitySumaryImage : AppCompatActivity() {
         var request = ProofRequest(url.toString(), url.toString(),emptyList, fromBoolean)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -259,7 +259,8 @@ class ActivitySumaryImage : AppCompatActivity() {
                     Log.e("API", "Lỗi khi lấy dữ liệu: ${response.message()}")
                     Toast.makeText(this@ActivitySumaryImage, "Post successfull", Toast.LENGTH_SHORT)
                         .show()
-
+                    var intent = Intent(this@ActivitySumaryImage,ActivitySumaryImage::class.java)
+                    startActivity(intent)
                 } else {
                     Toast.makeText(this@ActivitySumaryImage, response.message(), Toast.LENGTH_SHORT)
                         .show()
@@ -300,7 +301,7 @@ class ActivitySumaryImage : AppCompatActivity() {
             // Xử lý khi nút Yes được nhấn
             var loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-            val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+            val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
             //
             val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
             val client = OkHttpClient.Builder()

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foryou.Model.RescueTem.DataItemDonation
 import com.example.foryou.Model.Soponsor.DataItemPost
 import com.example.foryou.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class SoponsorAdapter: RecyclerView.Adapter<SoponsorAdapter.MyViewHolder>() {
     private var onDonation : OnPostDonation? = null
@@ -29,9 +31,22 @@ class SoponsorAdapter: RecyclerView.Adapter<SoponsorAdapter.MyViewHolder>() {
         fun bind(dataItem: DataItemPost){
             title.text = dataItem.eventName
             location.text=dataItem.status
-            time.text = dataItem.deadline
+            var times = dataItem.deadline
             money.text= dataItem.moneyNeed.toInt().toString()
             seeDetail.text = dataItem.rescueTeam.name
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+            try {
+                // Chuyển đổi chuỗi thành đối tượng Date
+                val date: Date = inputFormat.parse(times)
+
+                val formattedDate = outputFormat.format(date)
+                time.text = formattedDate.toString()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+
         }
 
     }

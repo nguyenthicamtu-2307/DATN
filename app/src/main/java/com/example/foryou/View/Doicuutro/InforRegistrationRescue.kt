@@ -55,7 +55,7 @@ class InforRegistrationRescue : AppCompatActivity() {
     fun regisRescue(subScriptionId:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -132,7 +132,7 @@ class InforRegistrationRescue : AppCompatActivity() {
         var subRequest = SubScriptionRequest(subList,fromMobile)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()

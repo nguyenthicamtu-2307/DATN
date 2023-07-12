@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foryou.Model.Event.DataItem
 import com.example.foryou.Model.Event.DataItemResCue
 import com.example.foryou.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RescueAdapter() :
     RecyclerView.Adapter<RescueAdapter.MyViewHolder>() {
@@ -29,7 +31,19 @@ class RescueAdapter() :
 
         fun bind(dataItem: DataItemResCue) {
             textViewName.text = dataItem.name
-            createat.text = dataItem.createdAt
+           var create = dataItem.createdAt
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+            try {
+                // Chuyển đổi chuỗi thành đối tượng Date
+                val date: Date = inputFormat.parse(create)
+
+                val formattedDate = outputFormat.format(date)
+                createat.text = formattedDate.toString()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
 
         }
 

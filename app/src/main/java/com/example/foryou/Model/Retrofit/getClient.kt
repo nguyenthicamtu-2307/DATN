@@ -39,7 +39,8 @@ interface getClient {
     fun login(
         @Body loginRequest: LoginRequest
     ): Call<LoginRespone>
-
+    @GET("admin/events") //relief-app/v1/admin/events
+    fun getAllEvent():Call<Event>
     //Local officer /relief-app/v1/local-officers/events
     @GET("local-officers/events")
     fun getListEvent():Call<Event>
@@ -146,4 +147,7 @@ interface getClient {
         @Path("id") id:String,
         @Body request :RescueSubProofRequest
     ):Call<RescueSubProofRespone>
+   @PATCH("sponsor/donations/{id}")
+    fun confirmDonationFinish(  @Path("id") id:String,
+                                @Body request :ConfirmFinish):Call<ConFirmRespone>
 }

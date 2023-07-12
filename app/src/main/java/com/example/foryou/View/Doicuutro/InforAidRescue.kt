@@ -20,6 +20,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class InforAidRescue : AppCompatActivity() {
     private lateinit var binding: ActivityInforAidBinding
@@ -29,6 +31,9 @@ class InforAidRescue : AppCompatActivity() {
 
         setContentView(binding.root)
         getId()
+
+    }
+    fun setOnLick(){
 
     }
     fun getId(){
@@ -44,7 +49,7 @@ class InforAidRescue : AppCompatActivity() {
 
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -64,12 +69,25 @@ class InforAidRescue : AppCompatActivity() {
                     var data = response.body()
                     binding.txtLocation.text = data?.data?.path
                     binding.txtEventName.text = data?.data?.eventName
-                    binding.txtStartAt.text =data?.data?.subscribeAt
-                    binding.txtEndAt.text = data?.data?.closedAt
+                   var start =data?.data?.subscribeAt
+                    var timeEnd = data?.data?.closedAt
                     binding.txtHouseHoldNumber.text =data?.data?.householdNumber.toString()
                     binding.txtUrl.text = data?.data?.householdsListUrl
                     binding.txtAmountOfMoney.text = data?.data?.isApproved.toString()
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(start)
+                        val timeEnds = inputFormat.parse(timeEnd)
+                        val formattedDate = outputFormat.format(date)
+                        val finishTime = outputFormat.format(timeEnds)
+                        binding.txtStartAt.text = formattedDate.toString()
+                        binding.txtEndAt.text = finishTime.toString()
 
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
 
                 }else{
                     Toast.makeText(this@InforAidRescue,response.message(), Toast.LENGTH_SHORT).show()

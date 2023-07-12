@@ -123,7 +123,7 @@
                 <TextView
                     android:textColor="@color/primaryColor"
                     android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Số tiển hiện có"
+                    android:text="Số tiền hiện có"
                     android:textSize="@dimen/_19sdp"
                     android:textStyle="bold"
                     android:layout_marginEnd="@dimen/_5sdp"

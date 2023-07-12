@@ -2,6 +2,7 @@ package com.example.foryou.View.Doicuutro
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import com.example.foryou.Model.RescueTem.ResponeRelief
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.R
+import com.example.foryou.View.Donation.DetailPostDonation
 import com.example.foryou.databinding.ActivityUpdateDetailReliefBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -93,7 +95,7 @@ class UpdateDetailRelief : AppCompatActivity() {
         var request = RequestRelief(amoutOfMoney.toInt(),totalMoney.toInt(),neccessary,fromMobile,endAt.toString(),startAt.toString())
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.5:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -111,7 +113,8 @@ class UpdateDetailRelief : AppCompatActivity() {
             override fun onResponse(call: Call<ResponeRelief>, response: Response<ResponeRelief>) {
                 if (response.isSuccessful){
                     Toast.makeText(this@UpdateDetailRelief,"update successfull", Toast.LENGTH_SHORT).show()
-
+                    var intent = Intent(this@UpdateDetailRelief, ListReliefResue::class.java)
+                    startActivity(intent)
                 }else{
                     Toast.makeText(this@UpdateDetailRelief,response.message(), Toast.LENGTH_SHORT).show()
 

@@ -5,184 +5,211 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.Login.LoginActivity">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-
-            android:text="@string/login"
-            android:textColor="@color/primaryColor"
-            android:textSize="@dimen/_27ssp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvSubName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="54dp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:text="@string/textsub_login"
-            android:textSize="@dimen/_14ssp"
-            app:layout_constraintTop_toTopOf="@id/tvName"
-            tools:layout_editor_absoluteX="-105dp" />
-        <Spinner
-            android:id="@+id/spnUserType"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_margin="@dimen/_16sdp"
-            android:background="@drawable/auto_textinput_custom"
-            android:inputType="none"
-            app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
-            app:boxCornerRadiusBottomStart="@dimen/_10sdp"
-
-            app:boxCornerRadiusTopEnd="@dimen/_10sdp"
-            app:boxCornerRadiusTopStart="@dimen/_10sdp" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/tvSubName">
-
-            <EditText
-                android:id="@+id/txtUsername"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/_15sdp"
-                android:background="@drawable/edittext_custom"
-                android:hint="Email"
-                android:textColorHint="@color/textcolor"
-                android:textSize="@dimen/_15ssp" />
-
-            <EditText
-                android:id="@+id/txtPass"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_margin="@dimen/_15sdp"
-                android:background="@drawable/edittext_custom"
-                android:hint="Mật Khẩuu"
-                android:inputType="textPassword"
-                android:textColorHint="@color/textcolor"
-                android:textSize="@dimen/_15ssp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_15sdp"
-                android:text="Quên mật khẩu?"
-                android:textAlignment="textEnd"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+
+                android:text="@string/login"
                 android:textColor="@color/primaryColor"
-                android:textSize="@dimen/_14ssp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:background="@drawable/button_custom"
-            android:backgroundTint="@color/primaryColor"
-            android:text="Đăng Nhập"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_15sdp" />
-
-        <LinearLayout
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <View
-                android:layout_width="@dimen/_105sdp"
-                android:layout_height="2dp"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:background="@color/gray" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hoặc"
-                android:textColor="@color/gray"
-                android:textSize="@dimen/_15ssp" />
-
-            <View
-                android:layout_width="@dimen/_105sdp"
-                android:layout_height="2dp"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:background="@color/gray" />
-        </LinearLayout>
-        <LinearLayout
-
-            android:paddingLeft="@dimen/_60sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:paddingTop="@dimen/_5sdp"
-            android:background="@drawable/edittext_custom"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
-            android:orientation="horizontal"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="84dp"
-                android:layout_height="50dp"
-                android:src="@drawable/gg" />
-            <TextView
-                android:textStyle="normal"
-                android:textColor="@color/primaryColor"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_20ssp"
-                android:text="Google"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
-        <LinearLayout
-            android:paddingStart="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_30sdp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_margin="@dimen/_5sdp"
-                android:textSize="@dimen/_15ssp"
-                android:text="Chưa có tài khoản?"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:id="@+id/tvSignUp"
+                android:textSize="@dimen/_27ssp"
                 android:textStyle="bold"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:textSize="@dimen/_15ssp"
-                android:textColor="@color/primaryColor"
-                android:text="Đăng ký"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tvSubName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="54dp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:text="@string/textsub_login"
+                android:textSize="@dimen/_14ssp"
+                app:layout_constraintTop_toTopOf="@id/tvName"
+                tools:layout_editor_absoluteX="-105dp" />
+
+            <Spinner
+                android:id="@+id/spnUserType"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_margin="@dimen/_16sdp"
+                android:background="@drawable/auto_textinput_custom"
+                android:inputType="none"
+                app:boxCornerRadiusBottomEnd="@dimen/_10sdp"
+                app:boxCornerRadiusBottomStart="@dimen/_10sdp"
+
+                app:boxCornerRadiusTopEnd="@dimen/_10sdp"
+                app:boxCornerRadiusTopStart="@dimen/_10sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/tvSubName">
+
+                <EditText
+                    android:id="@+id/txtUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:background="@drawable/edittext_custom"
+                    android:hint="Email"
+                    android:textColorHint="@color/textcolor"
+                    android:textSize="@dimen/_15ssp" />
+
+                <FrameLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/txtPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_margin="@dimen/_15sdp"
+                        android:background="@drawable/edittext_custom"
+                        android:hint="Mật Khẩuu"
+                        android:inputType="textPassword"
+                        android:textColorHint="@color/textcolor"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivPasswordShow"
+                        android:layout_width="@dimen/_25sdp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_22sdp"
+                        android:layout_marginStart="@dimen/_250sdp"
+                        android:src="@drawable/hidden_pass"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                </FrameLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:text="Quên mật khẩu?"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/button_custom"
+                android:backgroundTint="@color/primaryColor"
+                android:text="Đăng Nhập"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/_105sdp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@color/gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoặc"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_15ssp" />
+
+                <View
+                    android:layout_width="@dimen/_105sdp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@color/gray" />
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/edittext_custom"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/_60sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_5sdp">
+
+                <ImageView
+                    android:layout_width="84dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/gg" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Google"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_20ssp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_40sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:text="Chưa có tài khoản?"
+                    android:textSize="@dimen/_15ssp" />
+
+                <TextView
+                    android:id="@+id/tvSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:text="Đăng ký"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_15ssp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.foryou.View.Doicuutro
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -74,13 +75,15 @@ class PostRescueTeam : AppCompatActivity() {
     fun postDonation(id:String){
         var decription = binding.edtDetail.text.toString()
         var fromMobile:Boolean =true
+        var bank = binding.edtNameBank.text.toString()
+        var bankNumber  = binding.edtNumberBank.text.toString()
         var necessaryList = binding.edtNeccesary.text.toString()
         var moneyNeed = binding.edtTotalMn.text.toString()
         var deadline = binding.edtStart.text.toString()
-        var donationRequest =  DonationRequest(decription,moneyNeed.toInt(),necessaryList,fromMobile,deadline)
+        var donationRequest =  DonationRequest(decription,moneyNeed.toInt(),necessaryList,fromMobile,deadline,bankNumber,bank)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -102,7 +105,8 @@ class PostRescueTeam : AppCompatActivity() {
                 if (response.isSuccessful){
                     var dataPost = response.body()
                     Toast.makeText(this@PostRescueTeam,"Post successfull", Toast.LENGTH_SHORT).show()
-
+                    var intent = Intent(this@PostRescueTeam,ListDonationRescue::class.java)
+                    startActivity(intent)
                 }else{
                     Toast.makeText(this@PostRescueTeam,response.message(), Toast.LENGTH_SHORT).show()
 

@@ -1,15 +1,19 @@
 package com.example.foryou.View.Donation
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import com.example.foryou.Model.Donation.DonateRespone
 import com.example.foryou.Model.Donation.PostDonate
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.R
+import com.example.foryou.View.Donation.MainPage.Fragment.ManagerFragment
 import com.example.foryou.databinding.ActivityInforDonationBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,6 +29,7 @@ class InforDonation : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInforDonationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        getBankInfor()
         setOnClickRegist()
     }
 
@@ -33,21 +38,32 @@ class InforDonation : AppCompatActivity() {
             getPostId()
         }
     }
+    fun getBankInfor(){
+        val bankName = getSharedPreferences("Bank", Context.MODE_PRIVATE)
+        val bank = bankName?.getString("bank", "")
+        val bankNumber = bankName?.getString("bankNumber","")
+        val editableText = Editable.Factory.getInstance().newEditable(bankNumber)
+        binding.edtSTK.text= editableText
+        var tenNganHang = Editable.Factory.getInstance().newEditable(bank)
+        binding.edtNameBank.text = tenNganHang
+
+        Log.d("bank", bankNumber.toString())
+        Log.d("name",bank.toString())
+    }
  fun getPostId(){
      val sharedId = getSharedPreferences("DonationIdPost", Context.MODE_PRIVATE)
      val idDetail = sharedId?.getString("DonationId", "")
-//          val data_: String? = intent.getStringExtra("id")
-//
-     Log.d("idShare", idDetail.toString())
+
      regisDonate(idDetail.toString())
  }
     fun regisDonate(id:String){
+
         var money = binding.edtMoneyDonate.text.toString()
         var neccess =  binding.edtVatPham.text.toString()
         var donateRequest = PostDonate(money.toInt(),neccess)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -65,8 +81,9 @@ class InforDonation : AppCompatActivity() {
             override fun onResponse(call: Call<DonateRespone>, response: Response<DonateRespone>) {
                 if (response.isSuccessful){
                     var data = response.body()
-                    Toast.makeText(this@InforDonation,"Post successfull", Toast.LENGTH_SHORT).show()
-
+                    Toast.makeText(this@InforDonation,"Đăng kí quyên góp thành công . Upload minh chứng để hoàn thành xác nhân bạn nhé", Toast.LENGTH_SHORT).show()
+                    var intent = Intent(this@InforDonation,InforDonation2::class.java)
+                    startActivity(intent)
                 }else{
                     Toast.makeText(this@InforDonation,response.message(), Toast.LENGTH_SHORT).show()
 

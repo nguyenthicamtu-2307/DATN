@@ -2,13 +2,13 @@ package com.example.foryou.View.Doicuutro
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.foryou.Model.RescueTem.DetailRelief
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
-import com.example.foryou.R
+import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.databinding.ActivityDetailReliefBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -17,6 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailRelief : AppCompatActivity() {
     private lateinit var binding:ActivityDetailReliefBinding
@@ -43,7 +45,7 @@ class DetailRelief : AppCompatActivity() {
     fun detailRelief(id:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -60,14 +62,30 @@ class DetailRelief : AppCompatActivity() {
         api.detailReliefPlan(id).enqueue(object :Callback<DetailRelief>{
             override fun onResponse(call: Call<DetailRelief>, response: Response<DetailRelief>) {
                 if (response.isSuccessful){
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
                     var dataBinding = response.body()
                     binding.txtNameSubscription.text = dataBinding?.data?.rescueTeamName
                     binding.txtAmountOfMoney.text = dataBinding?.data?.reliefPlan?.aidPackage?.amountOfMoney.toString()
-                   binding.txtHouseHoldNumber.text = dataBinding?.data?.reliefPlan?.startAt
-                    binding.txtUrl.text = dataBinding?.data?.reliefPlan?.endAt
+                   var start = dataBinding?.data?.reliefPlan?.startAt
+                    var end = dataBinding?.data?.reliefPlan?.endAt
                     binding.txtNameLocalOfficer.text = dataBinding?.data?.reliefPlan?.aidPackage?.totalValue.toString()
                     binding.txtNessessary.text = dataBinding?.data?.reliefPlan?.aidPackage?.neccessariesList
-                    binding.txtStatusSub.text = dataBinding?.data?.createdAt
+                    var create = dataBinding?.data?.createdAt
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(start)
+                        var endat :Date = inputFormat.parse(end)
+                        var createAt:Date = inputFormat.parse(create)
+                        val formattedDate = outputFormat.format(date)
+                        var finishAt = outputFormat.format(endat)
+                        var createStart = outputFormat.format(createAt)
+                        binding.txtStatusSub.text = formattedDate.toString()
+                        binding.txtHouseHoldNumber.text = formattedDate.toString()
+                        binding.txtUrl.text = finishAt.toString()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                     val sharedPref = getSharedPreferences("DetailId", Context.MODE_PRIVATE)
                     if (sharedPref != null) {
                         with(sharedPref.edit()) {
@@ -94,6 +112,10 @@ class DetailRelief : AppCompatActivity() {
         }
         binding.btnPost.setOnClickListener {
             var intent = Intent(this,PostRescueTeam::class.java)
+            startActivity(intent)
+        }
+        binding.imgBackHome.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
     }

@@ -18,7 +18,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ManagerRelief"
+            android:name=".View.Doicuutro.DonationPost.ListSponsorDonate"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".View.Doicuutro.DonationPost.ListdonationPostRescue"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".View.MainPage.ListEventsTotal"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".View.Canbo.ManagerRelief"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

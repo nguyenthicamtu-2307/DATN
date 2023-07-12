@@ -9,6 +9,7 @@ import com.example.foryou.Model.LocalOfficer.DetailRegisSub
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.R
+import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.databinding.ActivityDetailSubscriptionBinding
 import com.example.foryou.databinding.ActivityLocalOfficeInforRegisterBinding
 import okhttp3.OkHttpClient
@@ -21,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class DetailSubscription : AppCompatActivity() {
     private lateinit var binding: ActivityDetailSubscriptionBinding
+    private lateinit var idSub:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityDetailSubscriptionBinding.inflate(layoutInflater)
@@ -36,9 +38,13 @@ class DetailSubscription : AppCompatActivity() {
             startActivity(intent)
 
         }
+        binding.imBack.setOnClickListener {
+            var intent = Intent(this,HomeActivity::class.java)
+            startActivity(intent)
+        }
     }
     fun getDetail(){
-        val sharedId = getSharedPreferences("Myis", Context.MODE_PRIVATE)
+        val sharedId = getSharedPreferences("IdShare", Context.MODE_PRIVATE)
         val idDetail = sharedId?.getString("idShare", "")
 //          val data_: String? = intent.getStringExtra("id")
 //
@@ -49,7 +55,7 @@ class DetailSubscription : AppCompatActivity() {
 
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -77,7 +83,15 @@ class DetailSubscription : AppCompatActivity() {
                     binding.txtNameLocalOfficer.text= data?.data?.localOfficerName
                     binding.txtNessessary.text = data?.data?.neccessariesList
                     binding.txtStatusSub.text = data?.data?.isCompleted.toString()
+                   idSub = data?.data?.id.toString()
+                    val sharedPref = getSharedPreferences("IDSUBSCRIPTION", Context.MODE_PRIVATE)
+                    if (sharedPref != null) {
+                        with(sharedPref.edit()) {
+                            putString("id", idSub)
+                            apply()
+                        }
 
+                    }
                 }else{
                     Log.e("API", "fail khi load dữ liệu: ${response.message()}")
 

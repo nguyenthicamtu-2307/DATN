@@ -3,6 +3,7 @@ package com.example.foryou.View.Doicuutro
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -131,7 +132,7 @@ class ReliefPlanRescue : AppCompatActivity() {
 
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -150,6 +151,8 @@ class ReliefPlanRescue : AppCompatActivity() {
                 if (response.isSuccessful){
                     var data= response.body()
                     Toast.makeText(this@ReliefPlanRescue,"cập nhật plan thành công",Toast.LENGTH_SHORT).show()
+                    var intent = Intent(this@ReliefPlanRescue,ListReliefResue::class.java)
+                    startActivity(intent)
                 }
                 else{
                     Log.e("API", "Lỗi khi update dữ liệu: ${response.message()}")

@@ -1,6 +1,7 @@
 package com.example.foryou.View.Canbo
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,8 +34,8 @@ class UpdateSubscription : AppCompatActivity() {
         }
     }
     fun getIdSub(){
-        val sharedId = getSharedPreferences("MyReliefId", Context.MODE_PRIVATE)
-        val idDetail = sharedId?.getString("ReliefId", "")
+        val sharedId = getSharedPreferences("IDSUBSCRIPTION", Context.MODE_PRIVATE)
+        val idDetail = sharedId?.getString("id", "")
 //          val data_: String? = intent.getStringExtra("id")
 //
         Log.d("idShare",idDetail.toString())
@@ -49,7 +50,7 @@ class UpdateSubscription : AppCompatActivity() {
 
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -71,6 +72,8 @@ class UpdateSubscription : AppCompatActivity() {
                 if(response.isSuccessful){
                     var data=response.body()
                     Toast.makeText(this@UpdateSubscription,"update successfull", Toast.LENGTH_SHORT).show()
+                    var intent = Intent(this@UpdateSubscription,DetailSubscription::class.java)
+                    startActivity(intent)
                 }else{
                     Log.e("API", "fail khi load dữ liệu: ${response.message()}")
 

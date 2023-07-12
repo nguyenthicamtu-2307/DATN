@@ -49,125 +49,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="71dp" />
 
-            <LinearLayout
-                android:id="@+id/dateChoose"
-                app:layout_constraintTop_toBottomOf="@id/imgDonation"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:padding="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_17ssp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="Ngày đăng kí:"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textSize="@dimen/_17ssp"
-                    android:textColor="@color/black"
-                    android:text="10/01/2023"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/dateDonation"
-                app:layout_constraintTop_toBottomOf="@id/dateChoose"
-                android:paddingTop="@dimen/_5sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_17ssp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="Ngày quyên góp:"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textSize="@dimen/_17ssp"
-                    android:textColor="@color/black"
-                    android:text="10/01/2023"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/moneyDonation"
-                app:layout_constraintTop_toBottomOf="@id/dateDonation"
-                android:paddingStart="@dimen/_10sdp"
-                android:paddingTop="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_17ssp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="Số tiền:"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textSize="@dimen/_17ssp"
-                    android:textColor="@color/primaryColor"
-                    android:text="10.000.000 VND    "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/neccessaryDonation"
-                app:layout_constraintTop_toBottomOf="@id/moneyDonation"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingStart="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:paddingEnd="@dimen/_10sdp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_17ssp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="Vật Phẩm:"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textSize="@dimen/_17ssp"
-                    android:textColor="@color/primaryColor"
-                    android:text="1. 100 thùng mì
-                                    2. 100 thùng nước
-                                    3. 100 thùng bánh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/statusDonation"
-                app:layout_constraintTop_toBottomOf="@id/neccessaryDonation"
-                android:paddingTop="@dimen/_15sdp"
-                android:paddingStart="@dimen/_10sdp"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:textSize="@dimen/_17ssp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:text="Trạng thái:"
-                    android:layout_marginEnd="@dimen/_2sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:textSize="@dimen/_17ssp"
-                    android:textColor="@color/primaryColor"
-                    android:text="Đang chờ "
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
             <LinearLayout
                 android:id="@+id/lnUploadDonation"
                 android:layout_width="match_parent"
@@ -180,7 +62,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.589"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/statusDonation"
                 app:layout_constraintVertical_bias="0.053">
 
                 <ImageView
@@ -203,13 +84,69 @@
                     android:textSize="@dimen/_15ssp"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/txtUrlImange"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:textSize="@dimen/_15sdp"
-                android:text="bababa"
+               android:tooltipText="bababa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/_105sdp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@color/gray" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hoặc"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/_15ssp" />
+
+                <View
+                    android:layout_width="@dimen/_105sdp"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
+                    android:background="@color/gray" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="@color/primaryColor"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:text="Nhập đường link hình ảnh"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:hint="đường linh url"
+                    android:id="@+id/edtUrl"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/edt_cus"
+                    android:layout_width="@dimen/_300sdp"
+                    android:layout_height="@dimen/_40sdp"/>
+            </LinearLayout>
+
+
             <LinearLayout
                 android:layout_marginTop="@dimen/_40sdp"
                 app:layout_constraintTop_toBottomOf="@id/lnUploadDonation"
@@ -217,7 +154,7 @@
                 android:layout_height="wrap_content">
                 <Button
                     android:id="@+id/btnXacNhan"
-                    android:text="Xác nhận"
+                    android:text="Upload"
                     android:textColor="@color/white"
                     android:fontFamily="serif"
                     android:layout_marginEnd="@dimen/_20sdp"
@@ -226,8 +163,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <Button
-                    android:text="Hủy"
-
+                    android:id="@+id/btnComplete"
+                    android:text="Hoàn thành"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:fontFamily="serif"

@@ -10,6 +10,7 @@ import com.example.foryou.Model.Retrofit.MyInterceptors
 
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.View.Doicuutro.InforRegistrationRescue
+import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.databinding.ActivityDetailPostRescueTeamBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -18,6 +19,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailPostRescueTeam : AppCompatActivity() {
     private lateinit var binding: ActivityDetailPostRescueTeamBinding
@@ -50,7 +53,7 @@ private lateinit var  productId:String
     fun getEventById(eventId:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -72,10 +75,23 @@ private lateinit var  productId:String
                    binding.imgDetailPostRescue.resources
                     binding.txtTitleEvent.text=data?.data?.name
                     binding.txtDetailEvent.text= data?.data?.description
-                    binding.txtStartTime.text=data?.data?.startDate
-                    binding.txtEndTime.text=data?.data?.endDate
+                    var start=data?.data?.startDate
+                    var end=data?.data?.endDate
                     binding.txtStatus.text=data?.data?.status
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(start)
+                        var endDate :Date = inputFormat.parse(end)
+                        val formattedDate = outputFormat.format(date)
+                        val DateEnd = outputFormat.format(endDate)
+                        binding.txtStartTime.text = formattedDate.toString()
+                        binding.txtEndTime.text = DateEnd.toString()
 
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
                 else{
                     Log.e("API", "Lỗi khi lấy dữ liệu: ${response.message()}")
@@ -96,10 +112,13 @@ private lateinit var  productId:String
 
             binding.btnDKCT.setOnClickListener {
 
-
                 val intent = Intent(this,LocalOfficeInforRegister::class.java)
                 startActivity(intent)
 
+        }
+        binding.goBack.setOnClickListener {
+            val intent = Intent(this,HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 }

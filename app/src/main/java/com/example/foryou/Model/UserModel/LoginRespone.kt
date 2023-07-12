@@ -8,11 +8,11 @@ data class LoginRespone(
 )
 
 data class Data(
+    val phoneNumber: String = "",
+    val fullName: String = "",
+    val userType: String = "",
     val accessToken: String = "",
+    val email: String = "",
     val username: String = "",
-    val refreshToken: String = "",
-    val fullname :String,
-    val userType:String,
-    val email:String,
-    val phoneNumber:String
+    val refreshToken: String = ""
 )

@@ -11,6 +11,9 @@ import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.Model.Soponsor.IdDonateDetail
 import com.example.foryou.R
+import com.example.foryou.View.Donation.MainPage.Fragment.ListDonationFragment
+import com.example.foryou.View.Donation.MainPage.Fragment.ManagerFragment
+import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.databinding.ActivityDonateDetailSponsorBinding
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,6 +22,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DonateDetailSponsor : AppCompatActivity() {
     private lateinit var binding:ActivityDonateDetailSponsorBinding
@@ -28,6 +33,7 @@ class DonateDetailSponsor : AppCompatActivity() {
         setContentView(binding.root)
         getIdDetail()
         setOnLickListener()
+
     }
     fun setOnLickListener(){
         binding.btnEdt.setOnClickListener {
@@ -37,6 +43,11 @@ class DonateDetailSponsor : AppCompatActivity() {
         binding.btnPost.setOnClickListener {
             var intent = Intent(this,InforDonation2::class.java)
             startActivity(intent)
+        }
+        binding.back.setOnClickListener {
+            var intent = Intent(this,HomeActivity::class.java)
+            startActivity(intent)
+
         }
     }
     fun getIdDetail(){
@@ -49,7 +60,7 @@ class DonateDetailSponsor : AppCompatActivity() {
     fun getDetailDonateId(id:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -79,7 +90,19 @@ class DonateDetailSponsor : AppCompatActivity() {
                         .load(imange)
                         .into(binding.txtStatusSub)
                     binding.txtNameLocalOfficer.text = data?.data?.money.toString()
-                    binding.txtUrl.text= data?.data?.deadline
+                    var deadline= data?.data?.deadline
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(deadline)
+
+                        val formattedDate = outputFormat.format(date)
+                        binding.txtUrl.text = formattedDate.toString()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }else{
                     Toast.makeText(this@DonateDetailSponsor,response.message(), Toast.LENGTH_SHORT).show()
 
@@ -92,5 +115,11 @@ class DonateDetailSponsor : AppCompatActivity() {
             }
 
         })
+    }
+    override fun onBackPressed() {
+        // Xử lý sự kiện khi nhấn nút Back
+        // Ví dụ: Đóng Activity, quay lại Fragment trước đó, vv.
+
+        super.onBackPressed() // Gọi super để thực hiện hành động mặc định (thoát Activity nếu không xử lý khác)
     }
 }

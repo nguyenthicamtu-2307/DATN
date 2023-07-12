@@ -12,6 +12,7 @@ import com.example.foryou.Model.Soponsor.DonateInforRequest
 import com.example.foryou.Model.Soponsor.DonatiaInforRespone
 import com.example.foryou.R
 import com.example.foryou.View.Doicuutro.ListDonationRescue
+import com.example.foryou.View.Donation.MainPage.Fragment.ManagerFragment
 import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.databinding.ActivityUpdateDonateInforBinding
 import okhttp3.OkHttpClient
@@ -49,7 +50,7 @@ class UpdateDonateInfor : AppCompatActivity() {
         var donateRequest = DonateInforRequest(moneyNeed.toInt(), need)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -70,7 +71,7 @@ class UpdateDonateInfor : AppCompatActivity() {
             ) {
                 if (response.isSuccessful){
                     Toast.makeText(this@UpdateDonateInfor,"Update data successfull", Toast.LENGTH_SHORT).show()
-                    var intent = Intent(this@UpdateDonateInfor , HomeActivity::class.java)
+                    var intent =Intent(this@UpdateDonateInfor,DonateDetailSponsor::class.java)
                     startActivity(intent)
                 }else{
                     Toast.makeText(this@UpdateDonateInfor,response.message(), Toast.LENGTH_SHORT).show()

@@ -14,6 +14,8 @@ import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.R
 import com.example.foryou.View.Canbo.LocalOfficeInforRegister
+import com.example.foryou.View.Donation.MainPage.HomeActivity
+import com.example.foryou.View.MainPage.ListEventsTotal
 import com.example.foryou.databinding.ActivityDetailPostRescueTeamBinding
 import com.example.foryou.databinding.FragmentDetailEventRescueBinding
 import okhttp3.OkHttpClient
@@ -23,6 +25,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailEventRescue : AppCompatActivity() {
     private lateinit var binding:FragmentDetailEventRescueBinding
@@ -51,7 +55,7 @@ class DetailEventRescue : AppCompatActivity() {
     fun getEventById(eventId:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -73,10 +77,23 @@ class DetailEventRescue : AppCompatActivity() {
                     binding.imgDetailPostRescue.resources
                     binding.txtTitleEvent.text=data?.data?.name
                     binding.txtDetailEvent.text= data?.data?.description
-                    binding.txtStartTime.text=data?.data?.startDate
-                    binding.txtEndTime.text=data?.data?.endDate
+                    var startDate=data?.data?.startDate
+                    var endDate=data?.data?.endDate
                     binding.txtStatus.text=data?.data?.status
                     binding.txtYear.text =data?.data?.year.toString()
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(startDate)
+                        val endTime :Date =inputFormat.parse(endDate)
+                        val formatEnd = outputFormat.format(endTime)
+                        val formattedDate = outputFormat.format(date)
+                        binding.txtStartTime.text = formattedDate.toString()
+                        binding.txtEndTime.text = formatEnd.toString()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
 
                 }
                 else{
@@ -102,6 +119,10 @@ class DetailEventRescue : AppCompatActivity() {
             val intent = Intent(this, InforRegistrationRescue::class.java)
             startActivity(intent)
 
+        }
+        binding.imgBackTo.setOnClickListener {
+            val intent = Intent(this, ListEventsTotal::class.java)
+            startActivity(intent)
         }
     }
 }

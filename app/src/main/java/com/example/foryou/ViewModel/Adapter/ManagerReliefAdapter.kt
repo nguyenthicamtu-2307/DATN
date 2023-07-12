@@ -7,6 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.foryou.Model.LocalOfficer.DataAction
 import com.example.foryou.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ManagerReliefAdapter: RecyclerView.Adapter<ManagerReliefAdapter.MyViewHolder>() {
     private var dataList = mutableListOf<DataAction>()
@@ -23,8 +25,20 @@ class ManagerReliefAdapter: RecyclerView.Adapter<ManagerReliefAdapter.MyViewHold
         fun bind(dataItem: DataAction){
             title.text = dataItem.rescueTeamName
             money.text = dataItem.amountOfMoney.toString()
-            time.text= dataItem.createdAt
+            var times= dataItem.createdAt
             location.text = dataItem.histories?.get(3)?.type
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+            try {
+                // Chuyển đổi chuỗi thành đối tượng Date
+                val date: Date = inputFormat.parse(times)
+
+                val formattedDate = outputFormat.format(date)
+                time.text = formattedDate.toString()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 

@@ -152,6 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <TextView
+                android:id="@+id/txtSeeAll"
                 android:textSize="@dimen/_10ssp"
                 android:textColor="@color/primaryColor"
                 android:text="Xem tất cả"

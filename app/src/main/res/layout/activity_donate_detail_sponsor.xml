@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/test"
     android:layout_height="match_parent"
     tools:context=".View.Donation.DonateDetailSponsor">
 
@@ -24,6 +25,7 @@
                     android:src="@drawable/imagedetail" />
 
                 <ImageView
+                    android:id="@+id/back"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:src="@drawable/ic_back"
@@ -73,7 +75,7 @@
                 <TextView
                     android:id="@+id/txtAmountOfMoney"
                     android:text="5000000"
-                    android:textSize="@dimen/_19sdp"
+                    android:textSize="@dimen/_15sdp"
                     android:textColor="@color/primaryColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -93,7 +95,7 @@
                 <TextView
                     android:id="@+id/txtHouseHoldNumber"
                     android:text="50"
-                    android:textSize="@dimen/_19sdp"
+                    android:textSize="@dimen/_15sdp"
                     android:textColor="@color/primaryColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -113,7 +115,7 @@
                 <TextView
                     android:id="@+id/txtUrl"
                     android:text="Xem"
-                    android:textSize="@dimen/_19sdp"
+                    android:textSize="@dimen/_15sdp"
                     android:textColor="@color/primaryColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -133,7 +135,7 @@
                 <TextView
                     android:id="@+id/txtNameLocalOfficer"
                     android:text="Nguyễn Cam tu"
-                    android:textSize="@dimen/_19sdp"
+                    android:textSize="@dimen/_15sdp"
                     android:textColor="@color/primaryColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -153,7 +155,7 @@
                 <TextView
                     android:id="@+id/txtNessessary"
                     android:text="Nguyễn Cam tu"
-                    android:textSize="@dimen/_19sdp"
+                    android:textSize="@dimen/_15sdp"
                     android:textColor="@color/primaryColor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
@@ -191,9 +193,9 @@
                 android:layout_height="wrap_content">
                 <Button
                     android:id="@+id/btnEdt"
-                    android:layout_width="163dp"
+                    android:layout_width="153dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_25sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_50sdp"
                     android:background="@drawable/button_custom"
                     android:text="Chỉnh sửa"
@@ -202,7 +204,7 @@
 
                 <Button
                     android:id="@+id/btnPost"
-                    android:layout_width="163dp"
+                    android:layout_width="153dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_50sdp"
                     android:background="@drawable/cancel_button"

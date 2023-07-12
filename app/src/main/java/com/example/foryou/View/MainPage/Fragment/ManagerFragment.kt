@@ -33,6 +33,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class ManagerFragment : Fragment() {
@@ -48,6 +50,7 @@ class ManagerFragment : Fragment() {
         getOnClick()
         return binding.root
     }
+
     fun getOnClick(){
         binding.btnConfirmFinish.setOnClickListener {
             showDialog()
@@ -63,7 +66,7 @@ class ManagerFragment : Fragment() {
     fun getInforRescueAction(){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = context?.getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -90,9 +93,22 @@ class ManagerFragment : Fragment() {
                     binding.txtEndAt.text = data?.data?.householdsListUrl
                     binding.txtMoneyDonate.text = data?.data?.reliefPlan?.aidPackage?.totalValue.toString()
                     binding.txtReliefNeccessary.text = data?.data?.reliefPlan?.aidPackage?.neccessariesList
-                    binding.txtReliefStart.text = data?.data?.reliefPlan?.startAt
-                    binding.txtReliefEnd.text = data?.data?.reliefPlan?.endAt
+                   var start = data?.data?.reliefPlan?.startAt
+                  var end= data?.data?.reliefPlan?.endAt
                     id = data?.data?.id.toString()
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(start)
+                        val endOF: Date = inputFormat.parse(end)
+                        val formattedDate = outputFormat.format(date)
+                        val formatEndOf = outputFormat.format(endOF)
+                        binding.txtReliefStart.text = formattedDate.toString()
+                        binding.txtReliefEnd.text = formatEndOf.toString()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
                 else{
                     Toast.makeText(requireContext(),response.message(), Toast.LENGTH_SHORT).show()

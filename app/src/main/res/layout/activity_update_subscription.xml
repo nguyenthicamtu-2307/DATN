@@ -55,94 +55,113 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Số Hộ Dan"
-                    android:textSize="@dimen/_19sdp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Số Hộ Dan"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/edtHoseholdNumber"
+                    android:layout_width="330dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/edt_cus"
-                    android:layout_width="@dimen/_300sdp"
-                    android:layout_height="@dimen/_40sdp"/>
+                    android:background="@drawable/edt_cus" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Danh sách hộ dân"
-                    android:textSize="@dimen/_19sdp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Danh sách hộ dân"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/edtHouseholdUrl"
+                    android:layout_width="330dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/edt_cus"
-                    android:layout_width="@dimen/_300sdp"
-                    android:layout_height="@dimen/_40sdp"/>
+                    android:background="@drawable/edt_cus" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Số tiển"
-                    android:textSize="@dimen/_19sdp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Số tiền"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/edtMoneyNeed"
+                    android:layout_width="330dp"
+
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/edt_cus"
-                    android:layout_width="@dimen/_300sdp"
-                    android:layout_height="@dimen/_40sdp"/>
+                    android:background="@drawable/edt_cus" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Danh sách Nhu Yếu Phẩm"
-                    android:textSize="@dimen/_19sdp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Danh sách Nhu Yếu Phẩm"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edtNeed"
-                    android:layout_width="@dimen/_300sdp"
+                    android:layout_width="330dp"
+
                     android:layout_height="74dp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"

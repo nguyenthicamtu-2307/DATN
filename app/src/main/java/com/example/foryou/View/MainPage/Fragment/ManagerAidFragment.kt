@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import com.example.foryou.R
 import com.example.foryou.View.Doicuutro.*
+import com.example.foryou.View.Doicuutro.DonationPost.ListdonationPostRescue
 import com.example.foryou.View.Doicuutro.ManagerAId.ImageSubScription
 import com.example.foryou.databinding.FragmentManagerAidBinding
 
@@ -37,9 +38,9 @@ class ManagerAidFragment : Fragment() {
             val intent = Intent(requireContext(),ListReliefResue::class.java)
             startActivity(intent)
         }
-        binding.lnList.setOnClickListener {
+        binding.lnListdonate.setOnClickListener {
             Log.d("bac","test")
-            val intent = Intent(requireContext(),ListDonationRescue::class.java)
+            val intent = Intent(requireContext(),ListdonationPostRescue::class.java)
             startActivity(intent)
         }
         binding.lnToTal.setOnClickListener {

@@ -12,6 +12,8 @@ import com.example.foryou.Model.ListEvent
 import com.example.foryou.Model.ListItem
 import com.example.foryou.Model.RescueTem.DataItemDonation
 import com.example.foryou.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PostDonationAdapter(): RecyclerView.Adapter<PostDonationAdapter.MyViewHolder>() {
     private var onDonation : OnDonationClick? = null
@@ -32,9 +34,21 @@ class PostDonationAdapter(): RecyclerView.Adapter<PostDonationAdapter.MyViewHold
         fun bind(dataItem: DataItemDonation){
             title.text = dataItem.eventName
             location.text=dataItem.status
-            time.text = dataItem.deadline
+           var deadline = dataItem.deadline
             money.text= dataItem.moneyNeed.toInt().toString()
             seeDetail.text = dataItem.rescueTeam.name
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+            try {
+                // Chuyển đổi chuỗi thành đối tượng Date
+                val date: Date = inputFormat.parse(deadline)
+
+                val formattedDate = outputFormat.format(date)
+                time.text = formattedDate.toString()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
 
     }

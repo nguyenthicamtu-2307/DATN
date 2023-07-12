@@ -24,6 +24,7 @@
                     android:src="@drawable/imagedetail" />
 
                 <ImageView
+                    android:id="@+id/imgBackHome"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginStart="@dimen/_15sdp"
                     android:src="@drawable/ic_back"
@@ -182,9 +183,9 @@
     android:layout_height="wrap_content">
     <Button
         android:id="@+id/btnEdt"
-        android:layout_width="163dp"
+        android:layout_width="153dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_25sdp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_50sdp"
         android:background="@drawable/button_custom"
         android:text="Chỉnh sửa"
@@ -193,7 +194,7 @@
 
     <Button
         android:id="@+id/btnPost"
-        android:layout_width="163dp"
+        android:layout_width="153dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_50sdp"
         android:background="@drawable/cancel_button"

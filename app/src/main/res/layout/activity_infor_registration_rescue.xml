@@ -9,7 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -20,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:id="@+id/btnBack"
                     android:layout_width="wrap_content"
                     android:src="@drawable/ic_back"
                     android:layout_marginEnd="@dimen/_20sdp"
@@ -100,47 +102,24 @@
                 android:layout_width="match_parent"
                 android:layout_margin="@dimen/_15sdp"
                 android:layout_height="@dimen/_40sdp"/>
-            <TextView
-                android:id="@+id/txtTimeAid"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:text="Chọn thời gian tham gia cứu trợ"
-                android:textColor="@color/primaryColor"
-                android:textStyle="bold"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:textSize="@dimen/_14ssp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edtMoneyAid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <EditText
-                android:id="@+id/edtTimeAid"
-                android:hint="Ngày cứu trợ"
-                android:textColorHint="@color/textcolor"
-                android:textStyle="bold"
-                android:background="@drawable/edittext_custom"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtTimeAid"
-                android:layout_width="match_parent"
-                android:layout_margin="@dimen/_15sdp"
-                android:paddingEnd="@dimen/_10sdp"
-                android:drawableRight="@drawable/ic_calendar"
-                android:layout_height="@dimen/_40sdp"/>
+
             <Button
+                android:layout_marginStart="@dimen/_70sdp"
                 android:id="@+id/btnConfirmRegis"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_80sdp"
-                android:background="@drawable/button_custom"
-                android:text="Xác Nhận"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="@dimen/_16ssp"
-                android:fontFamily="sans-serif"
-                android:textAllCaps="false"
                 android:layout_width="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/edtTimeAid"
-                android:layout_height="wrap_content"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_custom"
+                android:fontFamily="sans-serif"
+                android:text="Xác Nhận"
+                android:layout_marginTop="@dimen/_120sdp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:layout_editor_absoluteY="785dp" />
+        </LinearLayout>
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

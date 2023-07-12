@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.foryou.Model.RescueTem.DataItemRelief
 import com.example.foryou.Model.Soponsor.DataItem
 import com.example.foryou.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ListDonateAdapter:RecyclerView.Adapter<ListDonateAdapter.MyViewHolder> (){
 
@@ -24,7 +26,19 @@ class ListDonateAdapter:RecyclerView.Adapter<ListDonateAdapter.MyViewHolder> (){
         fun bind(dataItem: DataItem){
             title.text = dataItem.rescueTeam.name
             location.text = dataItem.status
-            time.text= dataItem.deadline
+           var timeLine= dataItem.deadline
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+            try {
+                // Chuyển đổi chuỗi thành đối tượng Date
+                val date: Date = inputFormat.parse(timeLine)
+
+                val formattedDate = outputFormat.format(date)
+                time.text = formattedDate.toString()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 

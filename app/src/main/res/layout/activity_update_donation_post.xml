@@ -29,35 +29,39 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </FrameLayout>
+
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="364dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Số tiền kêu gọi"
-                    android:textSize="@dimen/_19sdp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Số tiền kêu gọi"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/edtMoneyDonatio"
+                    android:layout_width="344dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/edt_cus"
-                    android:layout_width="@dimen/_300sdp"
-                    android:layout_height="@dimen/_40sdp"/>
+                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:background="@drawable/edt_cus" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/lnInforBank"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
                 app:layout_constraintTop_toBottomOf="@id/txtInfor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -68,10 +72,12 @@
                     android:text="Hạn quyên góp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
+
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_width="380dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/edtStart"
@@ -86,9 +92,9 @@
 
                     <ImageView
                         android:id="@+id/datePickStart"
-                        android:layout_marginTop="@dimen/_10sdp"
                         android:layout_width="70dp"
                         android:layout_height="62dp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:src="@drawable/ic_calendar" />
 
                 </LinearLayout>
@@ -96,47 +102,55 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="359dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Nhu yếu phẩm kêu gọi"
-                    android:textSize="@dimen/_19sdp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Nhu yếu phẩm kêu gọi"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold" />
+
                 <EditText
                     android:id="@+id/edtNhuYeuPham"
+                    android:layout_width="351dp"
+                    android:layout_height="@dimen/_40sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:background="@drawable/edt_cus"
-                    android:layout_width="@dimen/_300sdp"
-                    android:layout_height="@dimen/_40sdp"/>
+                    android:background="@drawable/edt_cus" />
             </LinearLayout>
+
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="364dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_20sdp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:orientation="vertical">
+
                 <TextView
-                    android:textColor="@color/primaryColor"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:text="Mô tả"
-                    android:textSize="@dimen/_19sdp"
-                    android:textStyle="bold"
-                    android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:text="Mô tả"
+                    android:textColor="@color/primaryColor"
+                    android:textSize="@dimen/_19sdp"
+                    android:textStyle="bold" />
 
                 <EditText
                     android:id="@+id/edtMota"
-                    android:layout_width="@dimen/_300sdp"
+                    android:layout_width="349dp"
                     android:layout_height="74dp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_15sdp"

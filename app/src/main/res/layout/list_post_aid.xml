@@ -69,7 +69,7 @@
                 android:layout_height="wrap_content"/>
             <TextView
                 android:id="@+id/txtTimePost"
-                android:layout_marginEnd="@dimen/_40sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name"

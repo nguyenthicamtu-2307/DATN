@@ -31,6 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ListDonationFragment : Fragment(),OnPostDonation {
     private lateinit var binding:FragmentListDonationBinding
     private lateinit var recyclerView: RecyclerView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +47,7 @@ class ListDonationFragment : Fragment(),OnPostDonation {
         recyclerView = binding.rcvListDonation
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = context?.getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()

@@ -134,7 +134,7 @@
             android:background="@drawable/linear_custom"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_15sdp"
-            android:id="@+id/lnList"
+            android:id="@+id/lnListdonate"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_50sdp"
             app:layout_constraintTop_toBottomOf="@id/lnPost"
@@ -170,7 +170,7 @@
             android:id="@+id/lnToTal"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/_50sdp"
-            app:layout_constraintTop_toBottomOf="@id/lnList"
+            app:layout_constraintTop_toBottomOf="@id/lnListdonate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView

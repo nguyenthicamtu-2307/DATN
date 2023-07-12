@@ -17,6 +17,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ManagerRelief : AppCompatActivity() {
     private lateinit var binding:ActivityManagerReliefBinding
@@ -37,7 +39,7 @@ class ManagerRelief : AppCompatActivity() {
     fun getInforRescueAction(id:String){
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -64,8 +66,22 @@ class ManagerRelief : AppCompatActivity() {
                     binding.txtEndAt.text = data?.data?.householdsListUrl
                     binding.txtMoneyDonate.text = data?.data?.reliefPlan?.aidPackage?.totalValue.toString()
                     binding.txtReliefNeccessary.text = data?.data?.reliefPlan?.aidPackage?.neccessariesList
-                    binding.txtReliefStart.text = data?.data?.reliefPlan?.startAt
-                    binding.txtReliefEnd.text = data?.data?.reliefPlan?.endAt
+                   var startTime = data?.data?.reliefPlan?.startAt
+                    var endTime = data?.data?.reliefPlan?.endAt
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                    val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+                    try {
+                        // Chuyển đổi chuỗi thành đối tượng Date
+                        val date: Date = inputFormat.parse(startTime)
+                        var enddate:Date = inputFormat.parse(endTime)
+                        var formateEndTime = outputFormat.format(enddate)
+                        val formattedDate = outputFormat.format(date)
+                        binding.txtReliefStart.text = formattedDate.toString()
+                        binding.txtReliefEnd.text = formateEndTime.toString()
+
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
                 else{
                     Toast.makeText(this@ManagerRelief,response.message(), Toast.LENGTH_SHORT).show()

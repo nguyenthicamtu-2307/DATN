@@ -2,8 +2,10 @@ package com.example.foryou.View.Donation
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.app.Activity
+import android.app.Dialog
 import android.content.ContentResolver
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -12,15 +14,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.foryou.Model.Proof.DonationDetailImagesItem
-import com.example.foryou.Model.Proof.ProofRequest
-import com.example.foryou.Model.Proof.ProofRespone
+import com.example.foryou.Model.Donation.ConFirmRespone
+import com.example.foryou.Model.Donation.ConfirmFinish
+import com.example.foryou.Model.Proof.*
 import com.example.foryou.Model.Retrofit.MyInterceptors
 import com.example.foryou.Model.Retrofit.getClient
 import com.example.foryou.R
+import com.example.foryou.View.Doicuutro.ActivitySumaryImage
+import com.example.foryou.View.Donation.MainPage.HomeActivity
 import com.example.foryou.databinding.ActivityInforDonation2Binding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -55,8 +61,82 @@ class InforDonation2 : AppCompatActivity() {
         binding.btnXacNhan.setOnClickListener {
             getIDDonation()
         }
+        binding.btnComplete.setOnClickListener {
+            getID()
+        }
     }
+    private fun showDialog(id:String) {
 
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_custom)
+
+        val textViewMessage = dialog.findViewById<TextView>(R.id.textViewMessage)
+        val buttonYes = dialog.findViewById<Button>(R.id.buttonYes)
+        val buttonNo = dialog.findViewById<Button>(R.id.buttonNo)
+
+        textViewMessage.text = "Are you sure?"
+        buttonYes.text = "finish"
+        var fromMobile :Boolean = true
+        var requets = ConfirmFinish("markAsComplete",fromMobile)
+        buttonYes.setOnClickListener {
+            // Xử lý khi nút Yes được nhấn
+            var loggingInterceptor =
+                HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
+            val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
+            //
+            val sharedPreferences =getSharedPreferences("Myref", Context.MODE_PRIVATE)
+            val client = OkHttpClient.Builder()
+                .addInterceptor(MyInterceptors(sharedPreferences))
+                .addInterceptor(loggingInterceptor)
+                .build()
+            val retrofit = Retrofit.Builder()
+                .baseUrl(baseURL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val api = retrofit.create(getClient::class.java)
+            api.confirmDonationFinish(id,requets).enqueue(object : Callback<ConFirmRespone>{
+                override fun onResponse(
+                    call: Call<ConFirmRespone>,
+                    response: Response<ConFirmRespone>
+                ) {
+                    if (response.isSuccessful){
+                        var dataPost = response.body()
+                        Toast.makeText(this@InforDonation2,"Cảm ơn bạn đã quyên góp!!", Toast.LENGTH_SHORT).show()
+                        var intent = Intent(this@InforDonation2,HomeActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(this@InforDonation2,response.message(), Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ConFirmRespone>, t: Throwable) {
+                    Toast.makeText(this@InforDonation2,"${t}", Toast.LENGTH_SHORT).show()
+
+                }
+
+            })
+        }
+
+        buttonNo.setOnClickListener {
+            // Xử lý khi nút No được nhấn
+            dialog.dismiss()
+        }
+
+        dialog.setOnDismissListener(DialogInterface.OnDismissListener {
+            // Xử lý khi hộp thoại được đóng
+        })
+
+        dialog.show()
+    }
+    fun getID() {
+        val sharedRes = getSharedPreferences("DonateID", Context.MODE_PRIVATE)
+        val id = sharedRes?.getString("DonateID", "")
+        Log.d("is", id.toString())
+        showDialog(id.toString())
+    }
     fun getIDDonation() {
         val sharedRes = getSharedPreferences("DonateID", Context.MODE_PRIVATE)
         val id = sharedRes?.getString("DonateID", "")
@@ -113,7 +193,7 @@ class InforDonation2 : AppCompatActivity() {
                 selectedImageUri?.let { getURLFromImagePath(context = baseContext, it) }
             val imageFile = File(selectedImagePath)
             if (imageFile.exists()) {
-                binding.txtUrlImange.text = "https://${selectedImagePath?.substring(1)}"
+                binding.txtUrlImange.text =selectedImagePath?.substring(1)
 
             } else {
                 Toast.makeText(this, "Không tìm thấy tập tin ảnh", Toast.LENGTH_SHORT).show()
@@ -144,12 +224,12 @@ class InforDonation2 : AppCompatActivity() {
     private fun uploadImage(id: String) {
         var url = binding.txtUrlImange.text
         var emptyList : List<DonationDetailImagesItem> = listOf(DonationDetailImagesItem(url.toString()))
-
+        var linkHinhanh = binding.edtUrl.text.toString()
         var fromBoolean: Boolean = true
-        var request = ProofRequest(url.toString(), url.toString(),emptyList, fromBoolean)
+        var request = ProofRequest(url.toString(), linkHinhanh.toString(),emptyList, fromBoolean)
         var loggingInterceptor =
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS)
-        val baseURL = "http://192.168.1.4:3000/relief-app/v1/"
+        val baseURL = "http://172.20.10.5:3000/relief-app/v1/"
         //
         val sharedPreferences = getSharedPreferences("Myref", Context.MODE_PRIVATE)
         val client = OkHttpClient.Builder()
@@ -172,6 +252,8 @@ class InforDonation2 : AppCompatActivity() {
                         "Upload Minh chứng thành công",
                         Toast.LENGTH_SHORT
                     ).show()
+                    var intent = Intent(this@InforDonation2,DonateDetailSponsor::class.java)
+                    startActivity(intent)
                 } else {
                     Toast.makeText(this@InforDonation2, response.message(), Toast.LENGTH_SHORT)
                         .show()
